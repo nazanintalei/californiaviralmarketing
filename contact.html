@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | California Viral Marketing Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #060608;
+  --dark:    #0d0d12;
+  --white:   #ffffff;
+  --orange:  #E8631A;
+  --teal:    #0ABFBC;
+  --purple:  #7B2D8B;
+  --pink:    #E91E8C;
+  --gold:    #C9A96E;
+  --brand:   linear-gradient(135deg, #E8631A 0%, #E91E8C 40%, #7B2D8B 70%, #0ABFBC 100%);
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Montserrat',sans-serif; background:var(--black); color:#fff; overflow-x:hidden; cursor:none; }
+
+/* ══ CURSOR ══ */
+#cur { position:fixed; width:10px; height:10px; border-radius:50%; pointer-events:none; z-index:99999; transform:translate(-50%,-50%); background:var(--teal); transition:width .25s,height .25s; }
+#cur-ring { position:fixed; width:36px; height:36px; border:1.5px solid rgba(10,191,188,.5); border-radius:50%; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); transition:width .3s,height .3s; }
+
+/* ══ NAV ══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:999;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 52px; height:78px;
+  background:rgba(6,6,8,.95);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);
+}
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.nav-logo-img { height:64px; width:auto; object-fit:contain; filter:drop-shadow(0 0 16px rgba(232,99,26,.5)); }
+.nav-brand-text { display:flex; flex-direction:column; }
+.nav-brand-main { font-size:11px; font-weight:800; letter-spacing:3px; text-transform:uppercase; color:#fff; line-height:1.3; }
+.nav-brand-sub { font-size:7px; font-weight:500; letter-spacing:3px; text-transform:uppercase; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.nav-links { display:flex; list-style:none; }
+.nav-links a {
+  display:block; padding:0 13px; height:78px; line-height:78px;
+  font-size:9px; letter-spacing:1.8px; font-weight:600; text-transform:uppercase;
+  color:rgba(255,255,255,.65); text-decoration:none; position:relative; transition:color .2s;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:18px; left:13px; right:13px; height:1.5px;
+  background:var(--brand); transform:scaleX(0); transition:transform .3s; border-radius:1px;
+}
+.nav-links a:hover, .nav-links a.active { color:#fff; }
+.nav-links a:hover::after, .nav-links a.active::after { transform:scaleX(1); }
+.nav-dropdown-wrap { position:relative; }
+.nav-chevron { font-size:9px; margin-left:3px; display:inline-block; transition:transform .3s; }
+.nav-dropdown-wrap:hover .nav-chevron { transform:rotate(180deg); }
+.nav-dropdown {
+  position:absolute; top:calc(100% - 8px); left:50%; transform:translateX(-50%) translateY(-8px);
+  min-width:200px; background:rgba(8,8,8,.97); backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.07); border-radius:4px; padding:8px 0;
+  opacity:0; visibility:hidden; transition:all .25s ease; z-index:9999;
+  box-shadow:0 24px 60px rgba(0,0,0,.6);
+}
+.nav-dropdown-wrap:hover .nav-dropdown { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+.nav-dropdown a { display:block; padding:10px 20px; height:auto; line-height:1.4; font-size:9px; letter-spacing:1.5px; font-weight:600; text-transform:uppercase; color:rgba(255,255,255,.55); border-left:2px solid transparent; transition:all .2s; }
+.nav-dropdown a::after { display:none; }
+.nav-dropdown a:hover { color:#fff; background:rgba(255,255,255,.04); border-left-color:var(--orange); padding-left:24px; }
+.nav-cta { padding:12px 26px; font-size:9px; letter-spacing:2.5px; font-weight:700; text-transform:uppercase; color:var(--black); cursor:none; border:none; background:var(--brand); border-radius:2px; transition:opacity .2s; }
+.nav-cta:hover { opacity:.85; }
+
+/* ══ PAGE HERO ══ */
+.page-hero {
+  min-height:52vh;
+  background:var(--black);
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 40px 80px;
+  position:relative;
+  overflow:hidden;
+}
+.page-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(123,45,139,.2) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(10,191,188,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(232,99,26,.12) 0%, transparent 50%);
+}
+/* Grid lines */
+.page-hero::after {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:80px 80px;
+}
+.page-hero-inner { position:relative; z-index:2; }
+.page-eyebrow {
+  display:inline-flex; align-items:center; gap:12px; margin-bottom:20px;
+}
+.pe-line { width:36px; height:1.5px; background:var(--brand); border-radius:1px; }
+.pe-text { font-size:9px; letter-spacing:4px; text-transform:uppercase; font-weight:700; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(48px,6vw,88px); font-weight:300;
+  letter-spacing:-1px; line-height:1.05; color:#fff; margin-bottom:20px;
+}
+.page-h1 em { font-style:italic; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.page-sub { font-size:13px; color:rgba(255,255,255,.5); font-weight:300; max-width:520px; margin:0 auto; line-height:1.9; }
+
+/* ══ CONTACT GRID ══ */
+.contact-section { padding:100px 80px; background:var(--black); }
+.contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:80px; max-width:1200px; margin:0 auto; align-items:start; }
+
+/* Left — info */
+.contact-info { }
+.ci-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.ci-ey-line { width:36px; height:1.5px; background:var(--brand); }
+.ci-ey-text { font-size:9px; letter-spacing:4px; text-transform:uppercase; font-weight:700; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.contact-info h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,4vw,56px); font-weight:300; line-height:1.1;
+  letter-spacing:-1px; color:#fff; margin-bottom:20px;
+}
+.contact-info h2 em { font-style:italic; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.contact-info p { font-size:13.5px; color:rgba(255,255,255,.5); line-height:2; font-weight:300; margin-bottom:48px; }
+
+/* Contact cards */
+.contact-cards { display:flex; flex-direction:column; gap:16px; margin-bottom:48px; }
+.cc {
+  display:flex; align-items:center; gap:20px;
+  padding:20px 24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:4px;
+  transition:all .3s; cursor:none;
+}
+.cc:hover { background:rgba(255,255,255,.06); border-color:rgba(232,99,26,.3); transform:translateX(6px); }
+.cc-icon {
+  width:48px; height:48px; border-radius:6px;
+  background:var(--brand);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.cc-icon svg { width:20px; height:20px; }
+.cc-label { font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:4px; font-weight:600; }
+.cc-val { font-size:13.5px; font-weight:500; color:#fff; }
+.cc-val a { color:#fff; text-decoration:none; }
+
+/* Social links */
+.contact-socials { display:flex; gap:10px; }
+.cs-btn {
+  width:44px; height:44px; border:1px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.45); text-decoration:none; font-size:14px;
+  transition:all .25s; cursor:none; border-radius:4px; font-weight:700;
+}
+.cs-btn:hover { background:var(--brand); border-color:transparent; color:#000; }
+
+/* Right — form */
+.contact-form-wrap {
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;
+  padding:48px 44px;
+  position:relative; overflow:hidden;
+}
+.contact-form-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--brand);
+}
+.form-h3 { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:300; color:#fff; letter-spacing:1px; margin-bottom:8px; }
+.form-sub { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1px; margin-bottom:36px; font-weight:300; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.form-group label { font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.45); font-weight:700; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;
+  padding:14px 16px;
+  font-size:13px; font-family:'Montserrat',sans-serif;
+  color:#fff; font-weight:300;
+  transition:border-color .25s, background .25s;
+  outline:none;
+  width:100%;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color:rgba(255,255,255,.22); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color:rgba(232,99,26,.5);
+  background:rgba(255,255,255,.06);
+}
+.form-group select { cursor:none; }
+.form-group select option { background:#0d0d12; color:#fff; }
+.form-group textarea { resize:vertical; min-height:130px; }
+.form-checkbox { display:flex; align-items:flex-start; gap:12px; margin-bottom:28px; cursor:none; }
+.form-checkbox input[type="checkbox"] { width:18px; height:18px; margin-top:1px; cursor:none; accent-color:var(--orange); flex-shrink:0; }
+.form-checkbox label { font-size:11.5px; color:rgba(255,255,255,.45); font-weight:300; line-height:1.7; cursor:none; }
+.form-checkbox label a { color:rgba(232,99,26,.8); text-decoration:none; }
+.btn-submit {
+  width:100%; padding:18px;
+  background:var(--brand); color:var(--black);
+  font-size:10px; letter-spacing:3px; font-weight:800; text-transform:uppercase;
+  border:none; border-radius:4px; cursor:none;
+  transition:transform .2s, box-shadow .3s, opacity .2s;
+  box-shadow:0 8px 32px rgba(232,99,26,.25);
+  position:relative; overflow:hidden;
+}
+.btn-submit:hover { transform:translateY(-2px); box-shadow:0 14px 44px rgba(232,99,26,.4); }
+.btn-submit:active { transform:translateY(0); }
+/* Success state */
+.form-success {
+  display:none;
+  text-align:center;
+  padding:40px 20px;
+}
+.form-success.show { display:block; }
+.success-icon {
+  width:64px; height:64px; border-radius:50%;
+  background:var(--brand); display:flex; align-items:center; justify-content:center;
+  margin:0 auto 20px;
+  animation:popIn .5s ease;
+}
+@keyframes popIn {
+  0%   { transform:scale(0); }
+  70%  { transform:scale(1.1); }
+  100% { transform:scale(1); }
+}
+.success-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:#fff; margin-bottom:10px; }
+.success-sub { font-size:12px; color:rgba(255,255,255,.5); line-height:1.8; font-weight:300; }
+
+/* ══ WHY CONTACT BAND ══ */
+.why-band { background:var(--dark); padding:80px; }
+.why-band-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.04); max-width:1200px; margin:0 auto; }
+.wb-item { background:var(--dark); padding:40px 32px; text-align:center; position:relative; overflow:hidden; transition:background .3s; }
+.wb-item::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--brand); transform:scaleX(0); transition:transform .4s; }
+.wb-item:hover::before { transform:scaleX(1); }
+.wb-item:hover { background:#111118; }
+.wb-icon { width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; transition:all .3s; }
+.wb-item:hover .wb-icon { background:rgba(232,99,26,.12); border-color:rgba(232,99,26,.3); }
+.wb-item:hover .wb-icon svg { stroke:rgba(232,99,26,.9); }
+.wb-title { font-size:10.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#fff; margin-bottom:10px; }
+.wb-desc { font-size:12px; color:rgba(255,255,255,.42); line-height:1.8; font-weight:300; }
+
+/* ══ MAP / LOCATION BAND ══ */
+.location-band { background:var(--black); padding:80px; }
+.location-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.loc-text .loc-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.loc-ey-line { width:36px; height:1.5px; background:var(--brand); }
+.loc-ey-text { font-size:9px; letter-spacing:4px; text-transform:uppercase; font-weight:700; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.loc-text h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,3.5vw,50px); font-weight:300; color:#fff; line-height:1.1; margin-bottom:20px; }
+.loc-text h2 em { font-style:italic; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.loc-text p { font-size:13px; color:rgba(255,255,255,.5); line-height:2; font-weight:300; margin-bottom:28px; }
+.loc-details { display:flex; flex-direction:column; gap:14px; }
+.ld-item { display:flex; align-items:center; gap:14px; }
+.ld-dot { width:8px; height:8px; border-radius:50%; background:var(--brand); flex-shrink:0; }
+.ld-text { font-size:12.5px; color:rgba(255,255,255,.6); font-weight:300; }
+.loc-map {
+  height:380px; border-radius:8px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.03);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.map-placeholder {
+  text-align:center;
+  font-size:12px; color:rgba(255,255,255,.3);
+  font-weight:300; letter-spacing:1px;
+}
+.map-placeholder svg { display:block; margin:0 auto 12px; }
+/* Embed real Google Maps iframe */
+.loc-map iframe { width:100%; height:100%; border:none; filter:grayscale(80%) invert(90%) contrast(90%); }
+
+/* ══ FAQ ══ */
+.faq-section { background:var(--dark); padding:100px 80px; }
+.faq-grid { max-width:900px; margin:56px auto 0; }
+.faq-item { border-bottom:1px solid rgba(255,255,255,.06); }
+.faq-q {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 0; cursor:none;
+  font-size:13px; font-weight:600; color:#fff; letter-spacing:.3px;
+  transition:color .2s; user-select:none;
+}
+.faq-q:hover { color:var(--orange); }
+.faq-icon {
+  width:28px; height:28px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.12);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; font-size:16px; color:rgba(255,255,255,.4);
+  transition:all .3s;
+}
+.faq-item.open .faq-icon { background:var(--brand); border-color:transparent; color:#000; transform:rotate(45deg); }
+.faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height .4s ease, padding .3s;
+}
+.faq-item.open .faq-a { max-height:300px; padding-bottom:20px; }
+.faq-a p { font-size:13px; color:rgba(255,255,255,.5); line-height:1.9; font-weight:300; }
+
+/* ══ CTA BAND ══ */
+.cta-band { background:var(--brand); padding:100px 80px; text-align:center; }
+.cta-band h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4vw,58px); font-weight:300; color:var(--black); letter-spacing:1px; margin-bottom:16px; line-height:1.15; }
+.cta-band p { font-size:13px; color:rgba(0,0,0,.6); font-weight:300; margin-bottom:40px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.9; }
+.btn-dark { display:inline-block; padding:18px 52px; background:var(--black); color:#fff; font-size:9.5px; letter-spacing:3px; font-weight:700; text-transform:uppercase; text-decoration:none; border-radius:2px; transition:opacity .2s; }
+.btn-dark:hover { opacity:.8; }
+
+/* ══ FOOTER ══ */
+footer { background:#030305; padding:56px 80px 40px; border-top:1px solid rgba(255,255,255,.04); }
+.footer-bottom { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.footer-bottom p { font-size:11px; color:rgba(255,255,255,.2); }
+.footer-bottom a { color:rgba(255,255,255,.2); text-decoration:none; }
+.footer-tagline { text-align:center; margin-top:24px; font-size:9px; letter-spacing:5px; text-transform:uppercase; background:var(--brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700; }
+
+/* ══ REVEAL ANIMATIONS ══ */
+.rv   { opacity:0; transform:translateY(32px); transition:opacity .85s ease,transform .85s ease; }
+.rv-l { opacity:0; transform:translateX(-32px); transition:opacity .85s ease,transform .85s ease; }
+.rv-r { opacity:0; transform:translateX(32px);  transition:opacity .85s ease,transform .85s ease; }
+.rv.on,.rv-l.on,.rv-r.on { opacity:1; transform:none; }
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1000px){
+  nav { padding:0 24px; }
+  .nav-links { display:none; }
+  .contact-grid,.location-inner { grid-template-columns:1fr; gap:48px; }
+  .why-band-grid { grid-template-columns:repeat(2,1fr); }
+  .form-row { grid-template-columns:1fr; }
+  .contact-section,.why-band,.location-band,.faq-section,.cta-band { padding:72px 32px; }
+  footer { padding:48px 32px 32px; }
+}
+@media(max-width:600px){
+  .why-band-grid { grid-template-columns:1fr; }
+  .page-hero { padding:100px 24px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="california-viral-marketing.html">
+    <img class="nav-logo-img" src="logo1.png" alt="California Viral Marketing Co." onerror="this.style.display='none'">
+    <div class="nav-brand-text">
+      <span class="nav-brand-main">California Viral</span>
+      <span class="nav-brand-sub">Marketing Co.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="california-viral-marketing.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="nav-dropdown-wrap">
+      <a href="services.html" class="nav-dropdown-trigger">Services <span class="nav-chevron">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="services.html">Meta Advertising</a>
+        <a href="services.html">Google Ads & PPC</a>
+        <a href="services.html">TikTok Marketing</a>
+        <a href="services.html">SEO & Content</a>
+        <a href="services.html">Content Creation</a>
+        <a href="services.html">Web Design</a>
+        <a href="services.html">Email & SMS</a>
+        <a href="services.html">Influencer Marketing</a>
+        <a href="services.html">Brand Strategy</a>
+      </div>
+    </li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="industries.html">Industries</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Get Started →</button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">
+      <div class="pe-line"></div>
+      <span class="pe-text">Get In Touch</span>
+      <div class="pe-line"></div>
+    </div>
+    <h1 class="page-h1">Let's Build Something<br><em>Extraordinary</em></h1>
+    <p class="page-sub">Ready to go viral and scale your business? Tell us about your brand and we'll show you exactly how we'd grow it.</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section" id="contact-form">
+  <div class="contact-grid">
+
+    <!-- LEFT — Contact Info -->
+    <div class="contact-info rv-l">
+      <div class="ci-eyebrow"><div class="ci-ey-line"></div><span class="ci-ey-text">Reach Us</span></div>
+      <h2>Start Your<br><em>Growth Journey</em></h2>
+      <p>We work with ambitious California brands ready to invest in performance marketing that actually delivers. Fill in the form or reach out directly — we respond within 24 hours.</p>
+
+      <div class="contact-cards">
+        <div class="cc">
+          <div class="cc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <p class="cc-label">Email Us</p>
+            <p class="cc-val"><a href="mailto:info@californiaviralmarketing.com">info@californiaviralmarketing.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-socials">
+        <a class="cs-btn" href="#" title="Instagram">◉</a>
+        <a class="cs-btn" href="#" title="TikTok">▶</a>
+        <a class="cs-btn" href="#" title="LinkedIn">in</a>
+        <a class="cs-btn" href="#" title="Twitter/X">𝕏</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — Form -->
+    <div class="contact-form-wrap rv-r">
+      <h3 class="form-h3">Send Us a Message</h3>
+      <p class="form-sub">We'll get back to you within 24 hours.</p>
+
+      <form id="main-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="john@yourbusiness.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+1 (555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Business Name *</label>
+          <input type="text" placeholder="Your Business Name" required>
+        </div>
+        <div class="form-group">
+          <label>Industry</label>
+          <select>
+            <option value="" disabled selected>Select your industry</option>
+            <option>Cosmetic Dentistry</option>
+            <option>Cosmetic Clinic</option>
+            <option>Aesthetic Clinic</option>
+            <option>Med Spa</option>
+            <option>Online Coaching / Influencer</option>
+            <option>Accredited Training</option>
+            <option>E-Commerce</option>
+            <option>Healthcare</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monthly Marketing Budget</label>
+          <select>
+            <option value="" disabled selected>Select your budget range</option>
+            <option>Under $1,000/month</option>
+            <option>$1,000 – $3,000/month</option>
+            <option>$3,000 – $5,000/month</option>
+            <option>$5,000 – $10,000/month</option>
+            <option>$10,000+/month</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Services Interested In</label>
+          <select>
+            <option value="" disabled selected>What can we help with?</option>
+            <option>Meta Advertising (Facebook & Instagram)</option>
+            <option>Google Ads & PPC</option>
+            <option>TikTok Marketing</option>
+            <option>SEO & Content Marketing</option>
+            <option>Web Design & Development</option>
+            <option>Full-Service Package</option>
+            <option>Not sure — need consultation</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Goals</label>
+          <textarea placeholder="What are you looking to achieve? What's your biggest marketing challenge right now?"></textarea>
+        </div>
+        <div class="form-checkbox">
+          <input type="checkbox" id="agree" required>
+          <label for="agree">I agree to be contacted by California Viral Marketing Co. regarding my enquiry. I understand my data will be handled in accordance with the <a href="#">Privacy Policy</a>.</label>
+        </div>
+        <button type="submit" class="btn-submit">Send Message — Let's Get Going →</button>
+      </form>
+
+      <!-- Success message -->
+      <div class="form-success" id="form-success">
+        <div class="success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <p class="success-title">Message Sent!</p>
+        <p class="success-sub">Thank you for reaching out. Our team will review your enquiry and get back to you within 24 hours.<br><br>In the meantime, follow us on social media for the latest results and case studies.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CONTACT BAND -->
+<section class="why-band">
+  <div style="text-align:center;margin-bottom:56px;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;">
+      <div style="width:36px;height:1.5px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);border-radius:1px;"></div>
+      <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Why Work With Us</span>
+      <div style="width:36px;height:1.5px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);border-radius:1px;"></div>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;">What Happens Next</h2>
+  </div>
+  <div class="why-band-grid rv">
+    <div class="wb-item">
+      <div class="wb-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.64A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.94 6.94l1.51-1.51a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </div>
+      <p class="wb-title">01 — We Call You</p>
+      <p class="wb-desc">Within 24 hours of your enquiry, one of our strategists will reach out to learn about your business.</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <p class="wb-title">02 — Free Audit</p>
+      <p class="wb-desc">We conduct a full audit of your current marketing, website, and competitors — completely free.</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
+        </svg>
+      </div>
+      <p class="wb-title">03 — Growth Plan</p>
+      <p class="wb-desc">We present a custom Viral Growth Blueprint with exact strategies, timelines and projected results.</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+        </svg>
+      </div>
+      <p class="wb-title">04 — We Launch</p>
+      <p class="wb-desc">Once you're happy, we get to work immediately. Most clients see results within the first 30 days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div style="text-align:center;margin-bottom:0;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;">
+      <div style="width:36px;height:1.5px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);border-radius:1px;"></div>
+      <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">FAQ</span>
+      <div style="width:36px;height:1.5px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);border-radius:1px;"></div>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;">Common Questions</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How quickly will I see results?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Most clients begin seeing meaningful results within the first 30 days. Paid advertising (Meta, Google, TikTok) tends to deliver the fastest results, while SEO typically shows strong growth within 3–6 months. We set realistic expectations from day one.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What is your minimum budget requirement?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>We typically work with clients who have a minimum monthly ad spend of $1,000 and a marketing budget to cover our management fees. We believe in partnerships where we can genuinely move the needle for your business.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do you work with businesses outside California?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Absolutely. While we are proudly California-based, we work with brands across the United States and internationally. Our digital-first approach means we can deliver world-class results regardless of your location.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How are you different from other agencies?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>We're a performance-first agency — every decision is driven by ROI, not vanity metrics. We rebuilt our entire approach post-iOS 2020 changes while most agencies struggled to adapt. Our 95% client renewal rate and 15X average ROI speaks for itself.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What does onboarding look like?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>After signing, we conduct a thorough discovery and audit process in the first week. By week two, your custom Viral Growth Blueprint is presented. By week three, we're live and generating results. It's fast, structured and completely guided by our team.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is there a long-term contract?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>We typically work on 3-month minimum agreements to allow enough time for proper testing, optimisation and results. After that, agreements roll monthly. Our 95% renewal rate means most clients choose to stay long-term because they're seeing real growth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>Ready to Go <strong>Viral</strong>?</h2>
+  <p>Fill in the form above or email us directly. We'll get back to you within 24 hours with a free strategy call.</p>
+  <a href="#contact-form" class="btn-dark">Send Your Message →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 California Viral Marketing Co. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms & Conditions</a></p>
+  </div>
+  <p class="footer-tagline">Viral Ideas. Real Results.</p>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,input,select,textarea,.cc,.faq-q').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='52px';curR.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='36px';curR.style.height='36px';});
+});
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+
+/* FORM SUBMIT */
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('main-form');
+  const success = document.getElementById('form-success');
+  form.style.opacity = '0';
+  form.style.transform = 'translateY(20px)';
+  form.style.transition = 'all .4s ease';
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.classList.add('show');
+  }, 400);
+}
+
+/* FAQ TOGGLE */
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
