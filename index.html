@@ -148,17 +148,37 @@ nav.scrolled {
 .hero-noise { position:absolute; inset:0; opacity:.04; z-index:2; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; }
 
 .hero-content { position:relative; z-index:5; max-width:580px; padding-top:78px; }
-.hero-logo-display {
-  margin-bottom:28px;
-  opacity:0;
-  animation:fadeUp .7s 1.8s forwards;
+
+/* ══ HERO LOGO BACKGROUND ══ */
+.hero-logo-bg {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 62%;
+  max-width: 820px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  animation: logoFadeIn 1.2s 2s ease forwards;
 }
-.hero-logo-display img {
-  height:100px;
-  width:auto;
-  object-fit:contain;
-  filter:drop-shadow(0 0 28px rgba(232,99,26,.55)) drop-shadow(0 0 56px rgba(10,191,188,.35));
+.hero-logo-bg img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.13;
+  filter: 
+    drop-shadow(0 0 60px rgba(232,99,26,.35))
+    drop-shadow(0 0 120px rgba(10,191,188,.25))
+    saturate(1.4)
+    brightness(1.1);
+  mix-blend-mode: screen;
 }
+@keyframes logoFadeIn {
+  0%   { opacity:0; transform:translateY(-50%) scale(0.95); }
+  100% { opacity:1; transform:translateY(-50%) scale(1); }
+}
+
 .hero-tag {
   display:inline-flex; align-items:center; gap:10px;
   margin-bottom:28px;
@@ -246,7 +266,7 @@ nav.scrolled {
 /* ══ PHONE MOCKUPS — HERO RIGHT SIDE ══ */
 .phones-zone {
   position:absolute; right:72px; top:50%; transform:translateY(-50%);
-  width:460px; height:560px; z-index:5; padding-top:44px;
+  width:460px; height:560px; z-index:6; padding-top:44px;
   opacity:0; animation:slideInRight .9s 2.2s forwards;
 }
 @keyframes slideInRight { from{opacity:0;transform:translateY(-50%) translateX(50px)} to{opacity:1;transform:translateY(-50%) translateX(0)} }
@@ -682,7 +702,7 @@ footer { background:#030305; padding:96px 80px 48px; }
     Replace the src below with your logo file path
     e.g. src="your-logo.png"
   -->
-  <img src="logo.png" alt="" style="height:110px;width:auto;object-fit:contain;opacity:0;animation:ldFade .8s .3s forwards;filter:drop-shadow(0 0 20px rgba(232,99,26,.5));" onerror="this.style.display='none'">
+  <img src="logo.png" id="loader-logo-img" alt="" style="height:110px;width:auto;object-fit:contain;opacity:0;animation:ldFade .8s .3s forwards;filter:drop-shadow(0 0 20px rgba(232,99,26,.5));" onerror="this.style.display='none'">
   <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:6px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:ldFade .8s .5s forwards;">California Viral</div>
   <div class="ldr-name">California Viral Marketing Co.</div>
   <div class="ldr-bar"><div class="ldr-fill"></div></div>
@@ -799,12 +819,13 @@ footer { background:#030305; padding:96px 80px 48px; }
   <div class="orb orb4"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="hero-noise"></div>
+  <!-- Logo as full-screen background watermark -->
+  <div class="hero-logo-bg" id="hero-logo-bg">
+    <img src="logo.png" alt="" id="hero-logo-img" onerror="this.style.display='none'">
+  </div>
 
   <div class="hero-content">
-    <!-- Hero logo — large display above headline -->
-    <div class="hero-logo-display">
-      <img id="hero-logo-img" src="logo.png" alt="" onerror="this.style.display='none';this.parentElement.style.display='none'">
-    </div>
+
     <div class="hero-tag">
       <div class="hero-tag-pill"><span>Performance Marketing Agency · California</span></div>
     </div>
@@ -1398,7 +1419,7 @@ const LOGO_FILENAMES = [
   'ChatGPT_Image_Apr_22__2026__02_01_49_PM.png'
 ];
 
-const LOGO_IDS = ['nav-logo-img','hero-logo-img','footer-logo-img'];
+const LOGO_IDS = ['nav-logo-img','hero-logo-img','footer-logo-img','loader-logo-img'];
 
 function tryLogo(imgEl, index) {
   if (index >= LOGO_FILENAMES.length) return;
