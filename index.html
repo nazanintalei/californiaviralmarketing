@@ -148,6 +148,17 @@ nav.scrolled {
 .hero-noise { position:absolute; inset:0; opacity:.04; z-index:2; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; }
 
 .hero-content { position:relative; z-index:5; max-width:580px; padding-top:78px; }
+.hero-logo-display {
+  margin-bottom:28px;
+  opacity:0;
+  animation:fadeUp .7s 1.8s forwards;
+}
+.hero-logo-display img {
+  height:100px;
+  width:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 0 28px rgba(232,99,26,.55)) drop-shadow(0 0 56px rgba(10,191,188,.35));
+}
 .hero-tag {
   display:inline-flex; align-items:center; gap:10px;
   margin-bottom:28px;
@@ -671,7 +682,8 @@ footer { background:#030305; padding:96px 80px 48px; }
     Replace the src below with your logo file path
     e.g. src="your-logo.png"
   -->
-  <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;letter-spacing:6px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:ldFade .8s .3s forwards;">California Viral</div>
+  <img src="logo.png" alt="California Viral Marketing Co." style="height:110px;width:auto;object-fit:contain;opacity:0;animation:ldFade .8s .3s forwards;filter:drop-shadow(0 0 20px rgba(232,99,26,.5));">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:6px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:ldFade .8s .5s forwards;">California Viral</div>
   <div class="ldr-name">California Viral Marketing Co.</div>
   <div class="ldr-bar"><div class="ldr-fill"></div></div>
 </div>
@@ -758,13 +770,9 @@ footer { background:#030305; padding:96px 80px 48px; }
 <!-- NAV -->
 <nav id="main-nav">
   <a class="nav-logo-slot" href="#">
-    <!--
-      ★ LOGO: Replace src="YOUR-LOGO.png" with your own logo file
-    -->
     <img class="nav-logo-img"
-      src="YOUR-LOGO.png"
-      alt="California Viral Marketing Co."
-      onerror="this.style.display='none'">
+      src="logo.png"
+      alt="California Viral Marketing Co.">
     <div class="nav-brand-text">
       <span class="nav-brand-main">California Viral</span>
       <span class="nav-brand-sub">Marketing Co.</span>
@@ -792,6 +800,10 @@ footer { background:#030305; padding:96px 80px 48px; }
   <div class="hero-noise"></div>
 
   <div class="hero-content">
+    <!-- Hero logo — large display above headline -->
+    <div class="hero-logo-display">
+      <img src="logo.png" alt="California Viral Marketing Co.">
+    </div>
     <div class="hero-tag">
       <div class="hero-tag-pill"><span>Performance Marketing Agency · California</span></div>
     </div>
@@ -1227,6 +1239,7 @@ footer { background:#030305; padding:96px 80px 48px; }
   <div class="footer-top">
     <div>
       <div class="footer-logo-zone">
+        <img class="footer-logo-img" src="logo.png" alt="California Viral Marketing Co.">
         <div>
           <div class="footer-brand-nm">California Viral</div>
           <div class="footer-brand-sb">Marketing Co.</div>
