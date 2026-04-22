@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | California Viral Marketing Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060608;--dark:#0d0d12;--white:#fff;
+  --orange:#E8631A;--teal:#0ABFBC;--purple:#7B2D8B;--pink:#E91E8C;
+  --brand:linear-gradient(135deg,#E8631A 0%,#E91E8C 40%,#7B2D8B 70%,#0ABFBC 100%);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:#fff;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);background:var(--teal);transition:width .25s,height .25s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(10,191,188,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:78px;background:rgba(6,6,8,.95);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(20px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo-img{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 0 16px rgba(232,99,26,.5));}
+.nav-brand-text{display:flex;flex-direction:column;}
+.nav-brand-main{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#fff;line-height:1.3;}
+.nav-brand-sub{font-size:7px;font-weight:500;letter-spacing:3px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;list-style:none;}
+.nav-links a{display:block;padding:0 13px;height:78px;line-height:78px;font-size:9px;letter-spacing:1.8px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:18px;left:13px;right:13px;height:1.5px;background:var(--brand);transform:scaleX(0);transition:transform .3s;border-radius:1px;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-dropdown-wrap{position:relative;}
+.nav-chevron{font-size:9px;margin-left:3px;display:inline-block;transition:transform .3s;}
+.nav-dropdown-wrap:hover .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% - 8px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:200px;background:rgba(8,8,8,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:8px 0;opacity:0;visibility:hidden;transition:all .25s ease;z-index:9999;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.nav-dropdown a{display:block;padding:10px 20px;height:auto;line-height:1.4;font-size:9px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.55);border-left:2px solid transparent;transition:all .2s;}
+.nav-dropdown a::after{display:none;}
+.nav-dropdown a:hover{color:#fff;background:rgba(255,255,255,.04);border-left-color:var(--orange);padding-left:24px;}
+.nav-cta{padding:12px 26px;font-size:9px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:var(--black);cursor:none;border:none;background:var(--brand);border-radius:2px;transition:opacity .2s;text-decoration:none;display:inline-block;line-height:normal;}
+.nav-cta:hover{opacity:.85;}
+
+/* PAGE HERO */
+.page-hero{min-height:52vh;background:var(--black);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(123,45,139,.18) 0%,transparent 55%),radial-gradient(ellipse 35% 40% at 10% 85%,rgba(10,191,188,.1) 0%,transparent 50%),radial-gradient(ellipse 35% 40% at 90% 15%,rgba(232,99,26,.1) 0%,transparent 50%);}
+.page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;}
+.hero-inner{position:relative;z-index:2;}
+.eyebrow-row{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+.ey-line{width:36px;height:1.5px;border-radius:1px;background:var(--brand);}
+.ey-text{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,88px);font-weight:300;letter-spacing:-1px;line-height:1.05;color:#fff;margin-bottom:20px;}
+.page-h1 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;max-width:520px;margin:0 auto;line-height:1.9;}
+
+/* FILTER BAR */
+.filter-bar{background:var(--dark);padding:20px 80px;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:78px;z-index:90;}
+.filter-inner{display:flex;align-items:center;gap:10px;max-width:1200px;margin:0 auto;flex-wrap:wrap;}
+.filter-label{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:700;margin-right:8px;}
+.filter-btn{padding:8px 18px;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:8.5px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;cursor:none;border-radius:20px;transition:all .25s;}
+.filter-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;}
+.filter-btn.active{background:var(--brand);border-color:transparent;color:var(--black);}
+
+/* FEATURED POST */
+.featured-section{background:var(--black);padding:80px 80px 60px;}
+.featured-inner{max-width:1200px;margin:0 auto;}
+.featured-label{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.fl-line{width:36px;height:1.5px;background:var(--brand);}
+.fl-text{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.featured-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;overflow:hidden;cursor:none;transition:border-color .3s;}
+.featured-card:hover{border-color:rgba(232,99,26,.3);}
+.fc-img{position:relative;overflow:hidden;}
+.fc-img img{width:100%;height:100%;min-height:440px;object-fit:cover;display:block;filter:grayscale(15%);transition:transform .6s,filter .4s;}
+.featured-card:hover .fc-img img{transform:scale(1.04);filter:grayscale(0%);}
+.fc-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(6,6,8,.3) 100%);}
+.fc-cat-badge{position:absolute;top:24px;left:24px;padding:5px 14px;background:var(--brand);border-radius:20px;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black);}
+.fc-content{padding:52px 48px;display:flex;flex-direction:column;justify-content:center;}
+.fc-meta{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.fc-date{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;}
+.fc-read{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;}
+.fc-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);}
+.fc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-.5px;}
+.fc-title em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.fc-excerpt{font-size:13px;color:rgba(255,255,255,.5);line-height:1.9;font-weight:300;margin-bottom:32px;}
+.fc-author{display:flex;align-items:center;gap:14px;}
+.fc-avatar{width:40px;height:40px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--black);flex-shrink:0;}
+.fc-author-name{font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;}
+.fc-author-role{font-size:9.5px;color:rgba(255,255,255,.35);margin-top:2px;}
+.fc-read-btn{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:9.5px;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s;cursor:none;}
+.fc-read-btn:hover{color:#fff;}
+.fc-read-btn .arr{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.fc-read-btn:hover .arr{background:var(--brand);border-color:transparent;}
+
+/* BLOG GRID */
+.blog-section{background:var(--black);padding:20px 80px 100px;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
+
+/* Blog card */
+.blog-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;overflow:hidden;cursor:none;transition:all .35s;display:flex;flex-direction:column;}
+.blog-card:hover{border-color:rgba(232,99,26,.3);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.4);}
+.bc-img{position:relative;overflow:hidden;}
+.bc-img img{width:100%;height:220px;object-fit:cover;display:block;filter:grayscale(20%);transition:transform .55s,filter .4s;}
+.blog-card:hover .bc-img img{transform:scale(1.05);filter:grayscale(0%);}
+.bc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.4) 0%,transparent 60%);}
+.bc-cat{position:absolute;top:16px;left:16px;padding:4px 12px;border-radius:20px;font-size:7.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;z-index:1;}
+.cat-meta    {background:rgba(232,99,26,.85);   color:#fff;}
+.cat-google  {background:rgba(10,191,188,.85);  color:#000;}
+.cat-tiktok  {background:rgba(0,0,0,.8);        color:#fff;border:1px solid rgba(255,255,255,.2);}
+.cat-seo     {background:rgba(123,45,139,.85);  color:#fff;}
+.cat-content {background:rgba(233,30,140,.85);  color:#fff;}
+.cat-strategy{background:rgba(201,169,110,.9);  color:#000;}
+.bc-body{padding:24px 24px 28px;flex:1;display:flex;flex-direction:column;}
+.bc-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.bc-date{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;}
+.bc-read-time{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;}
+.bc-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.15);}
+.bc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.25;margin-bottom:12px;flex:1;}
+.blog-card:hover .bc-title{background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bc-excerpt{font-size:12px;color:rgba(255,255,255,.45);line-height:1.8;font-weight:300;margin-bottom:20px;}
+.bc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,.05);}
+.bc-author{display:flex;align-items:center;gap:10px;}
+.bc-avatar{width:30px;height:30px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--black);flex-shrink:0;}
+.bc-author-name{font-size:10px;font-weight:600;color:rgba(255,255,255,.55);}
+.bc-arrow{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.blog-card:hover .bc-arrow{background:var(--brand);border-color:transparent;}
+
+/* NEWSLETTER BAND */
+.newsletter{background:var(--dark);padding:100px 80px;}
+.newsletter-inner{max-width:680px;margin:0 auto;text-align:center;}
+.nl-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+.nl-ey-line{width:36px;height:1.5px;background:var(--brand);}
+.nl-ey-text{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.newsletter h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:#fff;letter-spacing:-1px;line-height:1.1;margin-bottom:14px;}
+.newsletter h2 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.newsletter p{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;line-height:1.9;margin-bottom:40px;}
+.nl-form{display:flex;gap:0;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:border-color .3s;}
+.nl-form:focus-within{border-color:rgba(232,99,26,.5);}
+.nl-input{flex:1;padding:16px 20px;background:rgba(255,255,255,.04);border:none;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;outline:none;}
+.nl-input::placeholder{color:rgba(255,255,255,.25);}
+.nl-btn{padding:16px 28px;background:var(--brand);border:none;color:var(--black);font-size:9px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase;cursor:none;white-space:nowrap;transition:opacity .2s;}
+.nl-btn:hover{opacity:.85;}
+.nl-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:14px;font-weight:300;}
+
+/* TOPICS BAND */
+.topics{background:var(--black);padding:80px;}
+.topics-inner{max-width:1200px;margin:0 auto;}
+.topics-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;justify-content:center;}
+.topic-pill{padding:10px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;font-size:9px;letter-spacing:2px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.5);cursor:none;transition:all .25s;}
+.topic-pill:hover{background:rgba(255,255,255,.06);border-color:rgba(232,99,26,.4);color:#fff;}
+.topic-pill.active{background:var(--brand);border-color:transparent;color:var(--black);}
+
+/* CTA */
+.cta-band{background:var(--brand);padding:100px 80px;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--black);letter-spacing:1px;margin-bottom:16px;line-height:1.15;position:relative;}
+.cta-band p{font-size:13px;color:rgba(0,0,0,.6);font-weight:300;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;}
+.btn-dark{display:inline-block;padding:18px 52px;background:var(--black);color:#fff;font-size:9.5px;letter-spacing:3px;font-weight:700;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+.btn-dark:hover{opacity:.8;}
+
+/* FOOTER */
+footer{background:#030305;padding:56px 80px 40px;border-top:1px solid rgba(255,255,255,.04);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);}
+.footer-bottom a{color:rgba(255,255,255,.2);text-decoration:none;}
+.footer-tagline{text-align:center;margin-top:24px;font-size:9px;letter-spacing:5px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-l{opacity:0;transform:translateX(-32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-r{opacity:0;transform:translateX(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none;}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.rv.d4{transition-delay:.4s}.rv.d5{transition-delay:.5s}.rv.d6{transition-delay:.6s}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .filter-bar{padding:16px 24px;}
+  .featured-section,.blog-section,.newsletter,.topics,.cta-band{padding:72px 32px;}
+  .featured-card{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:repeat(2,1fr);}
+  footer{padding:48px 32px 32px;}
+}
+@media(max-width:600px){
+  .blog-grid{grid-template-columns:1fr;}
+  .page-hero{padding:100px 24px 60px;}
+  .nl-form{flex-direction:column;}
+  .nl-btn{width:100%;}
+  .topics{padding:60px 24px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="california-viral-marketing.html">
+    <img class="nav-logo-img" src="logo1.png" alt="California Viral Marketing Co." onerror="this.style.display='none'">
+    <div class="nav-brand-text">
+      <span class="nav-brand-main">California Viral</span>
+      <span class="nav-brand-sub">Marketing Co.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="california-viral-marketing.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="nav-dropdown-wrap">
+      <a href="services.html">Services <span class="nav-chevron">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="services.html#meta">Meta Advertising</a>
+        <a href="services.html#google">Google Ads & PPC</a>
+        <a href="services.html#tiktok">TikTok Marketing</a>
+        <a href="services.html#seo">SEO & Content</a>
+        <a href="services.html#content">Content Creation</a>
+        <a href="services.html#web">Web Design</a>
+        <a href="services.html#email">Email & SMS</a>
+        <a href="services.html#influencer">Influencer Marketing</a>
+        <a href="services.html#brand">Brand Strategy</a>
+      </div>
+    </li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <div class="ey-line"></div>
+      <span class="ey-text">Insights & Strategy</span>
+      <div class="ey-line"></div>
+    </div>
+    <h1 class="page-h1">Marketing Insights<br><em>From California.</em></h1>
+    <p class="page-sub">Proven strategies, platform updates and growth tactics from the team at California Viral Marketing Co. — written for brands ready to scale.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Category:</span>
+    <button class="filter-btn active" onclick="filterPosts('all',this)">All Posts</button>
+    <button class="filter-btn" onclick="filterPosts('meta',this)">Meta Ads</button>
+    <button class="filter-btn" onclick="filterPosts('google',this)">Google PPC</button>
+    <button class="filter-btn" onclick="filterPosts('tiktok',this)">TikTok</button>
+    <button class="filter-btn" onclick="filterPosts('seo',this)">SEO</button>
+    <button class="filter-btn" onclick="filterPosts('content',this)">Content</button>
+    <button class="filter-btn" onclick="filterPosts('strategy',this)">Strategy</button>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section class="featured-section">
+  <div class="featured-inner">
+    <div class="featured-label rv">
+      <div class="fl-line"></div>
+      <span class="fl-text">Featured Article</span>
+    </div>
+    <div class="featured-card rv" data-cat="meta">
+      <div class="fc-img">
+        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=85" alt="Meta Ads 2025">
+        <div class="fc-img-overlay"></div>
+        <div class="fc-cat-badge">Meta Advertising</div>
+      </div>
+      <div class="fc-content">
+        <div class="fc-meta">
+          <span class="fc-date">April 2026</span>
+          <span class="fc-dot"></span>
+          <span class="fc-read">8 min read</span>
+        </div>
+        <h2 class="fc-title">Why 90% of Meta Ad Campaigns Fail in 2026 — And <em>How to Be in the 10%</em></h2>
+        <p class="fc-excerpt">The rules of Meta advertising have changed completely since iOS 14. Most agencies are still running campaigns the old way — and wondering why costs are rising while results drop. Here's the new playbook we use for every California client.</p>
+        <div class="fc-author">
+          <div class="fc-avatar">CV</div>
+          <div>
+            <p class="fc-author-name">California Viral Team</p>
+            <p class="fc-author-role">Performance Marketing · Los Angeles</p>
+          </div>
+        </div>
+        <a href="contact.html" class="fc-read-btn">
+          <div class="arr">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+          Read Full Article
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG GRID -->
+<section class="blog-section">
+  <div class="blog-grid">
+
+    <!-- Post 1 -->
+    <div class="blog-card rv d1" data-cat="tiktok">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="TikTok Marketing">
+        <div class="bc-cat cat-tiktok">TikTok</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">April 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">6 min read</span>
+        </div>
+        <h3 class="bc-title">The TikTok Algorithm in 2026: What Actually Gets You Views</h3>
+        <p class="bc-excerpt">TikTok's algorithm rewards specific behaviours that most brands get completely wrong. Here's what our California campaigns have taught us about going viral consistently.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="blog-card rv d2" data-cat="seo">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="SEO 2026">
+        <div class="bc-cat cat-seo">SEO</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">March 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">7 min read</span>
+        </div>
+        <h3 class="bc-title">Local SEO for California Businesses: The 2026 Complete Guide</h3>
+        <p class="bc-excerpt">Ranking locally in California is harder than ever — but the opportunity is enormous. This is the exact local SEO framework we use to get clients to position one in their city.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="blog-card rv d3" data-cat="google">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=600&q=80" alt="Google Ads">
+        <div class="bc-cat cat-google">Google PPC</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">March 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">5 min read</span>
+        </div>
+        <h3 class="bc-title">Google Performance Max in 2026: Should You Use It?</h3>
+        <p class="bc-excerpt">Performance Max campaigns are controversial. After running hundreds of them for California clients we have a clear answer — and it depends entirely on your business type and goals.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="blog-card rv d1" data-cat="meta">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="Meta Ads Creative">
+        <div class="bc-cat cat-meta">Meta Ads</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">February 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">9 min read</span>
+        </div>
+        <h3 class="bc-title">The 5 Meta Ad Creative Formats That Are Crushing It Right Now</h3>
+        <p class="bc-excerpt">Ad creative is now the primary targeting variable on Meta. We analysed our top performing California campaigns and identified the 5 formats driving the highest ROAS in 2026.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="blog-card rv d2" data-cat="content">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80" alt="Content Creation">
+        <div class="bc-cat cat-content">Content</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">February 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">6 min read</span>
+        </div>
+        <h3 class="bc-title">How to Build a 30-Day Content Calendar That Actually Gets Engagement</h3>
+        <p class="bc-excerpt">Most content calendars are full of generic filler posts that nobody cares about. Here's the exact framework we use to plan content that stops the scroll and drives real business results.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="blog-card rv d3" data-cat="strategy">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Marketing Strategy">
+        <div class="bc-cat cat-strategy">Strategy</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">January 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">10 min read</span>
+        </div>
+        <h3 class="bc-title">The Viral Growth Blueprint: Our Full Marketing Framework Revealed</h3>
+        <p class="bc-excerpt">For the first time, we're sharing the complete framework behind every client success story. The 5-step system that has generated millions in revenue for California brands.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 7 -->
+    <div class="blog-card rv d1" data-cat="meta">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Lead Generation">
+        <div class="bc-cat cat-meta">Meta Ads</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">January 2026</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">7 min read</span>
+        </div>
+        <h3 class="bc-title">Meta Lead Gen vs. Landing Page Campaigns: Which Wins in 2026?</h3>
+        <p class="bc-excerpt">We've tested both extensively across California med spa, dental and coaching clients. The answer might surprise you — it's not as simple as "landing pages always win."</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 8 -->
+    <div class="blog-card rv d2" data-cat="seo">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80" alt="SEO Content">
+        <div class="bc-cat cat-seo">SEO</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">December 2025</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">8 min read</span>
+        </div>
+        <h3 class="bc-title">How We Grew a California Med Spa's Organic Traffic by 280% in 6 Months</h3>
+        <p class="bc-excerpt">A step-by-step breakdown of the exact SEO strategy we used to take a San Diego wellness clinic from page 3 to position 1 for their most valuable local keywords.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 9 -->
+    <div class="blog-card rv d3" data-cat="strategy">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80" alt="Agency Partnership">
+        <div class="bc-cat cat-strategy">Strategy</div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta">
+          <span class="bc-date">December 2025</span>
+          <span class="bc-dot"></span>
+          <span class="bc-read-time">5 min read</span>
+        </div>
+        <h3 class="bc-title">10 Red Flags That Your Marketing Agency Is Wasting Your Money</h3>
+        <p class="bc-excerpt">After speaking to hundreds of business owners across California, we've identified the most common signs that your current agency isn't delivering what you're paying for.</p>
+        <div class="bc-footer">
+          <div class="bc-author">
+            <div class="bc-avatar">CV</div>
+            <span class="bc-author-name">CVM Team</span>
+          </div>
+          <div class="bc-arrow">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOPICS BAND -->
+<section class="topics">
+  <div class="topics-inner">
+    <div style="text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+        <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Browse By Topic</span>
+        <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;" class="rv">Explore All Topics</h2>
+    </div>
+    <div class="topics-grid rv">
+      <span class="topic-pill active">All Posts</span>
+      <span class="topic-pill">Meta Advertising</span>
+      <span class="topic-pill">Google Ads & PPC</span>
+      <span class="topic-pill">TikTok Marketing</span>
+      <span class="topic-pill">SEO Strategy</span>
+      <span class="topic-pill">Content Creation</span>
+      <span class="topic-pill">Email Marketing</span>
+      <span class="topic-pill">Influencer Marketing</span>
+      <span class="topic-pill">Brand Strategy</span>
+      <span class="topic-pill">Web Design</span>
+      <span class="topic-pill">Case Studies</span>
+      <span class="topic-pill">California Business</span>
+      <span class="topic-pill">Growth Hacks</span>
+      <span class="topic-pill">Agency Tips</span>
+      <span class="topic-pill">Social Media</span>
+      <span class="topic-pill">iOS & Tracking</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner rv">
+    <div class="nl-eyebrow">
+      <div class="nl-ey-line"></div>
+      <span class="nl-ey-text">Stay Updated</span>
+      <div class="nl-ey-line"></div>
+    </div>
+    <h2>Get the Latest<br><em>Marketing Insights</em></h2>
+    <p>Join thousands of California business owners and marketers who get our weekly insights on paid advertising, SEO, content strategy and growth — straight to their inbox. No spam. Unsubscribe anytime.</p>
+    <form onsubmit="handleNL(event)">
+      <div class="nl-form">
+        <input class="nl-input" type="email" placeholder="Enter your email address" required id="nl-email">
+        <button class="nl-btn" type="submit">Subscribe →</button>
+      </div>
+    </form>
+    <p class="nl-note" id="nl-msg">No spam. Unsubscribe anytime. Join 2,400+ subscribers.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2 class="rv">Ready to Put These<br><strong>Strategies to Work?</strong></h2>
+  <p class="rv">Stop reading about results — let's create them. Book a free strategy call and we'll show you exactly how to grow your California business.</p>
+  <a href="contact.html" class="btn-dark rv">Book a Free Strategy Call →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 California Viral Marketing Co. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms & Conditions</a></p>
+  </div>
+  <p class="footer-tagline">Viral Ideas. Real Results.</p>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.blog-card,.featured-card,.topic-pill,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='52px';curR.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='36px';curR.style.height='36px';});
+});
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+
+/* FILTER POSTS */
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card=>{
+    const show = cat==='all' || card.dataset.cat===cat;
+    card.style.display = show ? 'flex' : 'none';
+  });
+  // Show featured if meta or all
+  const fc = document.querySelector('.featured-card');
+  if(fc) fc.style.display = (cat==='all'||cat==='meta') ? '' : 'none';
+}
+
+/* NEWSLETTER */
+function handleNL(e){
+  e.preventDefault();
+  const msg = document.getElementById('nl-msg');
+  msg.textContent = '✓ You\'re subscribed! Welcome to the California Viral community.';
+  msg.style.color = 'rgba(10,191,188,.8)';
+  document.getElementById('nl-email').value = '';
+}
+
+/* TOPIC PILLS */
+document.querySelectorAll('.topic-pill').forEach(pill=>{
+  pill.addEventListener('click',()=>{
+    document.querySelectorAll('.topic-pill').forEach(p=>p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
