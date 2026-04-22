@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | California Viral Marketing Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060608;--dark:#0d0d12;--white:#fff;
+  --orange:#E8631A;--teal:#0ABFBC;--purple:#7B2D8B;--pink:#E91E8C;--gold:#C9A96E;
+  --brand:linear-gradient(135deg,#E8631A 0%,#E91E8C 40%,#7B2D8B 70%,#0ABFBC 100%);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:#fff;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);background:var(--teal);transition:width .25s,height .25s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(10,191,188,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:78px;background:rgba(6,6,8,.95);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(20px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo-img{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 0 16px rgba(232,99,26,.5));}
+.nav-brand-text{display:flex;flex-direction:column;}
+.nav-brand-main{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#fff;line-height:1.3;}
+.nav-brand-sub{font-size:7px;font-weight:500;letter-spacing:3px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;list-style:none;}
+.nav-links a{display:block;padding:0 13px;height:78px;line-height:78px;font-size:9px;letter-spacing:1.8px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:18px;left:13px;right:13px;height:1.5px;background:var(--brand);transform:scaleX(0);transition:transform .3s;border-radius:1px;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-dropdown-wrap{position:relative;}
+.nav-chevron{font-size:9px;margin-left:3px;display:inline-block;transition:transform .3s;}
+.nav-dropdown-wrap:hover .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% - 8px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:200px;background:rgba(8,8,8,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:8px 0;opacity:0;visibility:hidden;transition:all .25s ease;z-index:9999;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.nav-dropdown a{display:block;padding:10px 20px;height:auto;line-height:1.4;font-size:9px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.55);border-left:2px solid transparent;transition:all .2s;}
+.nav-dropdown a::after{display:none;}
+.nav-dropdown a:hover{color:#fff;background:rgba(255,255,255,.04);border-left-color:var(--orange);padding-left:24px;}
+.nav-cta{padding:12px 26px;font-size:9px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:var(--black);cursor:none;border:none;background:var(--brand);border-radius:2px;transition:opacity .2s;text-decoration:none;display:inline-block;line-height:normal;}
+.nav-cta:hover{opacity:.85;}
+
+/* PAGE HERO */
+.page-hero{min-height:55vh;background:var(--black);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(232,99,26,.15) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 10% 90%,rgba(10,191,188,.1) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 90% 10%,rgba(123,45,139,.12) 0%,transparent 50%);}
+.page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;}
+.page-hero-inner{position:relative;z-index:2;}
+.eyebrow-row{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+.ey-line{width:36px;height:1.5px;border-radius:1px;background:var(--brand);}
+.ey-text{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,90px);font-weight:300;letter-spacing:-1px;line-height:1.05;color:#fff;margin-bottom:20px;}
+.page-h1 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;max-width:560px;margin:0 auto;line-height:1.9;}
+
+/* SHARED */
+.brand-grad{background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.btn-brand{display:inline-block;padding:16px 44px;background:var(--brand);color:var(--black);font-size:9.5px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:transform .2s,box-shadow .3s;box-shadow:0 6px 28px rgba(232,99,26,.25);cursor:none;}
+.btn-brand:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,99,26,.4);}
+.btn-outline-w{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:9.5px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .3s;border-radius:2px;}
+.btn-outline-w:hover{border-color:#fff;color:#fff;}
+.section-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;}
+.section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,50px);font-weight:300;letter-spacing:4px;text-transform:uppercase;text-align:center;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-l{opacity:0;transform:translateX(-32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-r{opacity:0;transform:translateX(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none;}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.rv.d4{transition-delay:.4s}.rv.d5{transition-delay:.5s}
+
+/* ══ SERVICES NAV STRIP ══ */
+.svc-nav{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.05);padding:0;position:sticky;top:78px;z-index:90;}
+.svc-nav-inner{display:flex;align-items:center;justify-content:center;gap:0;max-width:100%;overflow-x:auto;scrollbar-width:none;}
+.svc-nav-inner::-webkit-scrollbar{display:none;}
+.svc-nav-btn{padding:18px 20px;font-size:8.5px;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.4);background:transparent;border:none;cursor:none;transition:all .2s;white-space:nowrap;position:relative;border-bottom:2px solid transparent;}
+.svc-nav-btn:hover{color:rgba(255,255,255,.8);}
+.svc-nav-btn.active{color:#fff;border-bottom-color:var(--orange);}
+
+/* ══ SERVICE BLOCKS ══ */
+.svc-block{padding:100px 80px;position:relative;}
+.svc-block:nth-child(even){background:var(--dark);}
+.svc-block:nth-child(odd){background:var(--black);}
+.svc-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto;}
+.svc-grid.flip{direction:rtl;}
+.svc-grid.flip > *{direction:ltr;}
+.svc-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.svc-ey-line{width:36px;height:1.5px;background:var(--brand);}
+.svc-ey-num{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.svc-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.5vw,54px);font-weight:300;line-height:1.08;letter-spacing:-1px;color:#fff;margin-bottom:20px;}
+.svc-h2 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.svc-desc{font-size:13.5px;color:rgba(255,255,255,.5);line-height:2;font-weight:300;margin-bottom:28px;}
+/* Deliverables list */
+.svc-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.svc-list-item{display:flex;align-items:flex-start;gap:14px;font-size:12.5px;color:rgba(255,255,255,.6);font-weight:300;line-height:1.6;}
+.svc-list-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:7px;}
+/* Tags */
+.svc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.svc-tag{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:20px;transition:all .25s;}
+/* Visual panel */
+.svc-visual{position:relative;}
+.svc-card-visual{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  padding:40px;
+  position:relative;
+  overflow:hidden;
+  min-height:420px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.svc-card-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--brand);}
+.svc-cv-icon{width:64px;height:64px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.svc-cv-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:12px;}
+.svc-cv-sub{font-size:11px;color:rgba(255,255,255,.4);font-weight:300;line-height:1.7;margin-bottom:28px;}
+.svc-cv-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.svc-cv-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:16px;}
+.scvs-val{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.scvs-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px;}
+/* Floating accent */
+.svc-card-visual::after{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:var(--brand);opacity:.04;filter:blur(40px);}
+
+/* ══ PROCESS STRIP ══ */
+.process-strip{background:#fff;color:var(--black);padding:100px 80px;}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;max-width:1200px;margin:64px auto 0;position:relative;}
+.process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:#e8e8e8;z-index:0;}
+.step{text-align:center;padding:0 16px;position:relative;z-index:1;}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;margin:0 auto 20px;}
+.step-name{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black);margin-bottom:10px;}
+.step-desc{font-size:11.5px;color:#777;line-height:1.8;font-weight:300;}
+
+/* ══ PACKAGES ══ */
+.packages{background:var(--dark);padding:100px 80px;}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.04);max-width:1100px;margin:64px auto 0;}
+.pkg-card{background:var(--dark);padding:48px 36px;position:relative;overflow:hidden;transition:background .3s;cursor:none;}
+.pkg-card.featured{background:#111118;}
+.pkg-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--brand);transform:scaleX(0);transition:transform .4s;}
+.pkg-card:hover::after,.pkg-card.featured::after{transform:scaleX(1);}
+.pkg-card:hover{background:#111118;}
+.pkg-badge{display:inline-block;padding:4px 14px;background:var(--brand);color:var(--black);font-size:8px;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:20px;margin-bottom:20px;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;margin-bottom:8px;}
+.pkg-sub{font-size:11px;color:rgba(255,255,255,.4);font-weight:300;margin-bottom:28px;}
+.pkg-price{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:#fff;line-height:1;margin-bottom:4px;}
+.pkg-price span{font-size:16px;color:rgba(255,255,255,.4);font-family:'Montserrat',sans-serif;font-weight:300;}
+.pkg-billing{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:32px;}
+.pkg-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
+.pkg-feat{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,.55);font-weight:300;}
+.pkg-feat-check{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pkg-feat-check.on{background:var(--brand);}
+.pkg-cta{display:block;width:100%;padding:16px;background:transparent;border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:9px;letter-spacing:3px;font-weight:700;text-transform:uppercase;text-align:center;text-decoration:none;cursor:none;transition:all .3s;border-radius:2px;}
+.pkg-card.featured .pkg-cta{background:var(--brand);border-color:transparent;color:var(--black);}
+.pkg-cta:hover{background:var(--brand);border-color:transparent;color:var(--black);}
+
+/* ══ STATS ══ */
+.stats-band{background:var(--black);}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:100%;}
+.stat-cell{padding:72px 48px;text-align:center;border-right:1px solid rgba(255,255,255,.04);position:relative;}
+.stat-cell::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--brand);transform:scaleX(0);transition:transform .45s;}
+.stat-cell:hover::before{transform:scaleX(1);}
+.stat-big{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:1;margin-bottom:12px;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);}
+
+/* ══ CTA ══ */
+.cta-band{background:var(--brand);padding:100px 80px;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,58px);font-weight:300;color:var(--black);letter-spacing:1px;margin-bottom:16px;line-height:1.15;position:relative;}
+.cta-band p{font-size:13px;color:rgba(0,0,0,.6);font-weight:300;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;}
+.btn-dark{display:inline-block;padding:18px 52px;background:var(--black);color:#fff;font-size:9.5px;letter-spacing:3px;font-weight:700;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+.btn-dark:hover{opacity:.8;}
+
+/* FOOTER */
+footer{background:#030305;padding:56px 80px 40px;border-top:1px solid rgba(255,255,255,.04);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);}
+.footer-bottom a{color:rgba(255,255,255,.2);text-decoration:none;}
+.footer-tagline{text-align:center;margin-top:24px;font-size:9px;letter-spacing:5px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .svc-grid,.svc-grid.flip{grid-template-columns:1fr;direction:ltr;}
+  .process-steps{grid-template-columns:repeat(3,1fr);gap:32px;}
+  .process-steps::before{display:none;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .svc-block,.process-strip,.packages,.cta-band{padding:72px 32px;}
+  footer{padding:48px 32px 32px;}
+}
+@media(max-width:600px){
+  .process-steps{grid-template-columns:1fr 1fr;}
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .page-hero{padding:100px 24px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="california-viral-marketing.html">
+    <img class="nav-logo-img" src="logo1.png" alt="California Viral Marketing Co." onerror="this.style.display='none'">
+    <div class="nav-brand-text">
+      <span class="nav-brand-main">California Viral</span>
+      <span class="nav-brand-sub">Marketing Co.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="california-viral-marketing.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="nav-dropdown-wrap">
+      <a href="services.html" class="active">Services <span class="nav-chevron">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="#meta">Meta Advertising</a>
+        <a href="#google">Google Ads & PPC</a>
+        <a href="#tiktok">TikTok Marketing</a>
+        <a href="#seo">SEO & Content</a>
+        <a href="#content">Content Creation</a>
+        <a href="#web">Web Design</a>
+        <a href="#email">Email & SMS</a>
+        <a href="#influencer">Influencer Marketing</a>
+        <a href="#brand">Brand Strategy</a>
+      </div>
+    </li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="industries.html">Industries</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow-row">
+      <div class="ey-line"></div>
+      <span class="ey-text">What We Do</span>
+      <div class="ey-line"></div>
+    </div>
+    <h1 class="page-h1">9 Services.<br><em>One Goal: Your Growth.</em></h1>
+    <p class="page-sub">Everything you need to dominate your market — from paid ads and SEO to full web design, content creation and brand strategy. All under one California roof.</p>
+  </div>
+</section>
+
+<!-- STICKY SERVICE NAV -->
+<div class="svc-nav">
+  <div class="svc-nav-inner">
+    <button class="svc-nav-btn active" onclick="scrollTo('meta')">Meta Ads</button>
+    <button class="svc-nav-btn" onclick="scrollTo('google')">Google PPC</button>
+    <button class="svc-nav-btn" onclick="scrollTo('tiktok')">TikTok</button>
+    <button class="svc-nav-btn" onclick="scrollTo('seo')">SEO</button>
+    <button class="svc-nav-btn" onclick="scrollTo('content')">Content</button>
+    <button class="svc-nav-btn" onclick="scrollTo('web')">Web Design</button>
+    <button class="svc-nav-btn" onclick="scrollTo('email')">Email & SMS</button>
+    <button class="svc-nav-btn" onclick="scrollTo('influencer')">Influencer</button>
+    <button class="svc-nav-btn" onclick="scrollTo('brand')">Brand Strategy</button>
+  </div>
+</div>
+
+<!-- 01 META ADVERTISING -->
+<section class="svc-block" id="meta">
+  <div class="svc-grid">
+    <div class="rv-l">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 01</span></div>
+      <h2 class="svc-h2">Meta <em>Advertising</em></h2>
+      <p class="svc-desc">Facebook and Instagram remain the most powerful paid social platforms for direct-response marketing. We build high-converting Meta campaigns that fill your pipeline with qualified leads — not just clicks.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Full funnel strategy — from cold audiences to warm retargeting</div>
+        <div class="svc-list-item">High-converting ad creative — static, video and carousel formats</div>
+        <div class="svc-list-item">Audience research, lookalike building and interest targeting</div>
+        <div class="svc-list-item">A/B testing framework for continuous improvement</div>
+        <div class="svc-list-item">Pixel setup, conversion tracking and attribution modelling</div>
+        <div class="svc-list-item">Weekly reporting with real-time dashboard access</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Facebook Ads</span><span class="svc-tag">Instagram Ads</span>
+        <span class="svc-tag">Retargeting</span><span class="svc-tag">Lead Gen</span>
+        <span class="svc-tag">E-Commerce</span><span class="svc-tag">Video Ads</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Start Meta Campaign →</a>
+    </div>
+    <div class="svc-visual rv-r">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="rgba(255,255,255,0.7)" stroke="none"/><path d="M9 6h6"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Meta Advertising</p>
+          <p class="svc-cv-sub">Average results across our California Meta campaigns over the past 12 months.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">14X</div><div class="scvs-label">Avg. ROAS</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">$2.80</div><div class="scvs-label">Cost Per Lead</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">38%</div><div class="scvs-label">Avg. CTR Lift</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">120+</div><div class="scvs-label">Leads / Month</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 GOOGLE ADS -->
+<section class="svc-block" id="google">
+  <div class="svc-grid flip">
+    <div class="rv-r">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 02</span></div>
+      <h2 class="svc-h2">Google Ads <em>& PPC</em></h2>
+      <p class="svc-desc">Capture high-intent buyers at the exact moment they're searching for what you offer. Our Google Ads campaigns are built to dominate search results and convert clicks into paying customers consistently.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Google Search — capture buyers actively searching for your services</div>
+        <div class="svc-list-item">Google Shopping — showcase products with price, image and reviews</div>
+        <div class="svc-list-item">YouTube pre-roll and in-stream video advertising</div>
+        <div class="svc-list-item">Display network remarketing and prospecting campaigns</div>
+        <div class="svc-list-item">Keyword research, negative keyword management and bid strategy</div>
+        <div class="svc-list-item">Landing page optimisation for maximum Quality Score</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Google Search</span><span class="svc-tag">Shopping Ads</span>
+        <span class="svc-tag">YouTube Ads</span><span class="svc-tag">Display</span>
+        <span class="svc-tag">Remarketing</span><span class="svc-tag">Performance Max</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Launch Google Campaign →</a>
+    </div>
+    <div class="svc-visual rv-l">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Google Ads & PPC</p>
+          <p class="svc-cv-sub">Average results across our Google Ads client accounts in California.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">12X</div><div class="scvs-label">Avg. ROAS</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">4.8%</div><div class="scvs-label">Avg. CTR</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">-42%</div><div class="scvs-label">CPC Reduction</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">Top 3</div><div class="scvs-label">Avg. Ad Position</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 TIKTOK -->
+<section class="svc-block" id="tiktok">
+  <div class="svc-grid">
+    <div class="rv-l">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 03</span></div>
+      <h2 class="svc-h2">TikTok <em>Marketing</em></h2>
+      <p class="svc-desc">TikTok is the fastest-growing platform in the world — and it demands a completely different approach. We create viral-first content and paid campaigns that reach millions, build brand awareness and drive real conversions.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">TikTok paid advertising — In-Feed, TopView and Spark Ads</div>
+        <div class="svc-list-item">Organic content strategy and posting schedule</div>
+        <div class="svc-list-item">UGC (User Generated Content) campaign planning</div>
+        <div class="svc-list-item">TikTok Shop integration for e-commerce brands</div>
+        <div class="svc-list-item">Trend research and viral content frameworks</div>
+        <div class="svc-list-item">Full creative production — scripting, filming, editing</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">TikTok Ads</span><span class="svc-tag">Organic TikTok</span>
+        <span class="svc-tag">UGC Strategy</span><span class="svc-tag">Viral Campaigns</span>
+        <span class="svc-tag">TikTok Shop</span><span class="svc-tag">Spark Ads</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Go Viral on TikTok →</a>
+    </div>
+    <div class="svc-visual rv-r">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">TikTok Marketing</p>
+          <p class="svc-cv-sub">Average results across our TikTok client campaigns.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">48K+</div><div class="scvs-label">Avg. Video Views</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">3.2%</div><div class="scvs-label">Conversion Rate</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">10X</div><div class="scvs-label">Avg. ROAS</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">$1.20</div><div class="scvs-label">Cost Per Click</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SEO -->
+<section class="svc-block" id="seo">
+  <div class="svc-grid flip">
+    <div class="rv-r">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 04</span></div>
+      <h2 class="svc-h2">SEO & Content <em>Marketing</em></h2>
+      <p class="svc-desc">Paid ads get immediate results. SEO builds an asset that compounds over time. We combine both to give your brand maximum visibility — now and forever. Our SEO approach is built around revenue, not rankings.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Full technical SEO audit and implementation</div>
+        <div class="svc-list-item">Local SEO — dominate "near me" searches across California</div>
+        <div class="svc-list-item">Keyword strategy based on buyer intent, not just volume</div>
+        <div class="svc-list-item">On-page optimisation — meta tags, schema, internal linking</div>
+        <div class="svc-list-item">Authority link building from high-quality relevant sources</div>
+        <div class="svc-list-item">Blog content that ranks, educates and converts</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Technical SEO</span><span class="svc-tag">Local SEO</span>
+        <span class="svc-tag">Link Building</span><span class="svc-tag">Content Strategy</span>
+        <span class="svc-tag">Blog Writing</span><span class="svc-tag">Schema Markup</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Dominate Google →</a>
+    </div>
+    <div class="svc-visual rv-l">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">SEO & Content</p>
+          <p class="svc-cv-sub">Average results across our SEO clients within 6 months.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">+280%</div><div class="scvs-label">Organic Traffic</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">Top 3</div><div class="scvs-label">Keyword Rankings</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">6mo</div><div class="scvs-label">To See Results</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">-60%</div><div class="scvs-label">Cost Per Lead</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 CONTENT CREATION -->
+<section class="svc-block" id="content">
+  <div class="svc-grid">
+    <div class="rv-l">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 05</span></div>
+      <h2 class="svc-h2">Content <em>Creation</em></h2>
+      <p class="svc-desc">In a world of infinite scroll, content is what stops the thumb. Our California creative team produces scroll-stopping Reels, TikToks, photography and video ads that build your brand identity and drive measurable engagement.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Reels and TikTok video production — scripted and filmed</div>
+        <div class="svc-list-item">Professional photography — brand, product and lifestyle</div>
+        <div class="svc-list-item">Graphic design — social templates, stories and ad creative</div>
+        <div class="svc-list-item">Video ad production for Meta, Google and TikTok</div>
+        <div class="svc-list-item">Monthly content calendar planning and scheduling</div>
+        <div class="svc-list-item">Caption writing and hashtag strategy</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Reels & TikToks</span><span class="svc-tag">Photography</span>
+        <span class="svc-tag">Graphic Design</span><span class="svc-tag">Video Production</span>
+        <span class="svc-tag">Ad Creative</span><span class="svc-tag">Content Calendar</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Create Viral Content →</a>
+    </div>
+    <div class="svc-visual rv-r">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Content Creation</p>
+          <p class="svc-cv-sub">Average content performance metrics across our managed accounts.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">40+</div><div class="scvs-label">Pieces / Month</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">8.4%</div><div class="scvs-label">Avg. Engagement</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">5X</div><div class="scvs-label">Reach Growth</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">72hr</div><div class="scvs-label">Turnaround</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 WEB DESIGN -->
+<section class="svc-block" id="web">
+  <div class="svc-grid flip">
+    <div class="rv-r">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 06</span></div>
+      <h2 class="svc-h2">Web Design <em>& Development</em></h2>
+      <p class="svc-desc">Your website is your most valuable sales tool. We design and build high-converting websites and landing pages that look stunning, load fast and are engineered to turn visitors into paying customers.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Custom website design — built to match your brand identity</div>
+        <div class="svc-list-item">High-converting landing pages for paid advertising campaigns</div>
+        <div class="svc-list-item">Shopify e-commerce store build and optimisation</div>
+        <div class="svc-list-item">WordPress development with custom theme and plugins</div>
+        <div class="svc-list-item">Mobile-first responsive design for all devices</div>
+        <div class="svc-list-item">Speed optimisation, SEO foundations and analytics setup</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Custom Design</span><span class="svc-tag">Landing Pages</span>
+        <span class="svc-tag">Shopify</span><span class="svc-tag">WordPress</span>
+        <span class="svc-tag">E-Commerce</span><span class="svc-tag">CRO</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Build My Website →</a>
+    </div>
+    <div class="svc-visual rv-l">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Web Design</p>
+          <p class="svc-cv-sub">Average improvements seen after our website rebuilds.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">+320%</div><div class="scvs-label">Conversion Rate</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">1.8s</div><div class="scvs-label">Avg. Load Time</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">-55%</div><div class="scvs-label">Bounce Rate Drop</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">14day</div><div class="scvs-label">Avg. Build Time</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 EMAIL & SMS -->
+<section class="svc-block" id="email">
+  <div class="svc-grid">
+    <div class="rv-l">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 07</span></div>
+      <h2 class="svc-h2">Email & SMS <em>Marketing</em></h2>
+      <p class="svc-desc">Your email and SMS list is one of the most valuable assets your business owns. We build automated sequences and campaigns that nurture leads, recover abandoned carts and drive repeat revenue completely on autopilot.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Email automation — welcome, nurture and post-purchase flows</div>
+        <div class="svc-list-item">SMS campaign setup and blast management</div>
+        <div class="svc-list-item">CRM setup and integration — Klaviyo, HubSpot, GoHighLevel</div>
+        <div class="svc-list-item">List segmentation and personalisation strategy</div>
+        <div class="svc-list-item">Abandoned cart recovery sequences</div>
+        <div class="svc-list-item">A/B testing for subject lines, content and send times</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Email Automation</span><span class="svc-tag">SMS Marketing</span>
+        <span class="svc-tag">Klaviyo</span><span class="svc-tag">HubSpot</span>
+        <span class="svc-tag">GoHighLevel</span><span class="svc-tag">CRM Setup</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Build My Automations →</a>
+    </div>
+    <div class="svc-visual rv-r">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Email & SMS</p>
+          <p class="svc-cv-sub">Average performance across our email and SMS managed clients.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">42%</div><div class="scvs-label">Avg. Open Rate</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">8.6%</div><div class="scvs-label">Click Through Rate</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">$0</div><div class="scvs-label">Ad Spend Required</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">30%</div><div class="scvs-label">Revenue Recovered</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 INFLUENCER -->
+<section class="svc-block" id="influencer">
+  <div class="svc-grid flip">
+    <div class="rv-r">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 08</span></div>
+      <h2 class="svc-h2">Influencer <em>Marketing</em></h2>
+      <p class="svc-desc">California is home to the world's most powerful creator economy. We connect your brand with the right influencers — from micro-creators with hyper-engaged audiences to celebrity talent — and manage every aspect of the campaign.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Influencer identification and vetting — audience quality analysis</div>
+        <div class="svc-list-item">Outreach, negotiation and contract management</div>
+        <div class="svc-list-item">Campaign brief creation and content approval process</div>
+        <div class="svc-list-item">UGC (User Generated Content) campaigns for paid ads</div>
+        <div class="svc-list-item">Performance tracking — reach, engagement and conversions</div>
+        <div class="svc-list-item">Long-term ambassador programme development</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Micro Influencers</span><span class="svc-tag">Macro Influencers</span>
+        <span class="svc-tag">UGC Campaigns</span><span class="svc-tag">Instagram</span>
+        <span class="svc-tag">TikTok Creators</span><span class="svc-tag">YouTube</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Find My Influencers →</a>
+    </div>
+    <div class="svc-visual rv-l">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Influencer Marketing</p>
+          <p class="svc-cv-sub">Average results from our California influencer campaigns.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">500K+</div><div class="scvs-label">Avg. Reach</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">6.2%</div><div class="scvs-label">Engagement Rate</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">8X</div><div class="scvs-label">Avg. ROAS</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">48hr</div><div class="scvs-label">Campaign Live</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 BRAND STRATEGY -->
+<section class="svc-block" id="brand">
+  <div class="svc-grid">
+    <div class="rv-l">
+      <div class="svc-eyebrow"><div class="svc-ey-line"></div><span class="svc-ey-num">Service 09</span></div>
+      <h2 class="svc-h2">Brand Strategy <em>& Identity</em></h2>
+      <p class="svc-desc">Before you go viral, you need to know exactly who you are — and why anyone should care. We build brand foundations that make you impossible to ignore, from your visual identity to your messaging and market positioning.</p>
+      <div class="svc-list">
+        <div class="svc-list-item">Brand positioning and competitive differentiation</div>
+        <div class="svc-list-item">Visual identity — logo, colour palette, typography system</div>
+        <div class="svc-list-item">Brand messaging — tone of voice, taglines and copy guidelines</div>
+        <div class="svc-list-item">Go-to-market strategy for new products or market entry</div>
+        <div class="svc-list-item">Brand guidelines document for consistent execution</div>
+        <div class="svc-list-item">Competitor analysis and market opportunity mapping</div>
+      </div>
+      <div class="svc-tags">
+        <span class="svc-tag">Brand Identity</span><span class="svc-tag">Logo Design</span>
+        <span class="svc-tag">Positioning</span><span class="svc-tag">Messaging</span>
+        <span class="svc-tag">Go-To-Market</span><span class="svc-tag">Brand Guidelines</span>
+      </div>
+      <a href="contact.html" class="btn-brand">Build My Brand →</a>
+    </div>
+    <div class="svc-visual rv-r">
+      <div class="svc-card-visual">
+        <div>
+          <div class="svc-cv-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+            </svg>
+          </div>
+          <p class="svc-cv-title">Brand Strategy</p>
+          <p class="svc-cv-sub">What strong brand foundations deliver for our clients.</p>
+        </div>
+        <div class="svc-cv-stats">
+          <div class="svc-cv-stat"><div class="scvs-val">+180%</div><div class="scvs-label">Ad Performance</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">-30%</div><div class="scvs-label">Cost Per Lead</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">3X</div><div class="scvs-label">Brand Recognition</div></div>
+          <div class="svc-cv-stat"><div class="scvs-val">14day</div><div class="scvs-label">Delivery Time</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-strip">
+  <div style="text-align:center;margin-bottom:0;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;">
+      <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+      <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">How We Work</span>
+      <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,46px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:var(--black);" class="rv">Our Viral Growth Blueprint</h2>
+  </div>
+  <div class="process-steps">
+    <div class="step rv d1"><div class="step-num">1</div><p class="step-name">Discovery</p><p class="step-desc">Full audit of your brand, audience, competitors and current marketing performance.</p></div>
+    <div class="step rv d2"><div class="step-num">2</div><p class="step-name">Strategy</p><p class="step-desc">Custom Viral Growth Blueprint covering every channel, campaign and creative direction.</p></div>
+    <div class="step rv d3"><div class="step-num">3</div><p class="step-name">Creation</p><p class="step-desc">Scroll-stopping content, ad creative and assets built to convert your exact audience.</p></div>
+    <div class="step rv d4"><div class="step-num">4</div><p class="step-name">Launch</p><p class="step-desc">Go live across all channels with daily monitoring and rapid scaling of winners.</p></div>
+    <div class="step rv d5"><div class="step-num">5</div><p class="step-name">Optimise</p><p class="step-desc">Continuous testing, reporting and refinement so results compound month after month.</p></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages">
+  <div class="section-eyebrow rv"><div class="ey-line"></div><span class="ey-text">Pricing</span><div class="ey-line"></div></div>
+  <h2 class="section-h2 light rv" style="margin-top:14px;">Choose Your Package</h2>
+  <div class="pkg-grid">
+    <div class="pkg-card rv d1">
+      <p class="pkg-name">Starter</p>
+      <p class="pkg-sub">Perfect for businesses just getting started with paid marketing.</p>
+      <p class="pkg-price">Custom<span> pricing</span></p>
+      <p class="pkg-billing">tailored to your business</p>
+      <div class="pkg-features">
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>1 Ad Platform (Meta or Google)</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Monthly ad creative (4 assets)</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Monthly reporting</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Email support</div>
+        <div class="pkg-feat"><div class="pkg-feat-check"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/></svg></div><span style="opacity:.3">Multi-platform management</span></div>
+        <div class="pkg-feat"><div class="pkg-feat-check"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/></svg></div><span style="opacity:.3">Dedicated account manager</span></div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Get Started →</a>
+    </div>
+    <div class="pkg-card featured rv d2">
+      <div class="pkg-badge">Most Popular</div>
+      <p class="pkg-name">Growth</p>
+      <p class="pkg-sub">The full Viral Growth Blueprint — everything you need to scale.</p>
+      <p class="pkg-price">Custom<span> pricing</span></p>
+      <p class="pkg-billing">tailored to your business</p>
+      <div class="pkg-features">
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Meta + Google + TikTok</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Monthly creative (12 assets)</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Weekly reporting + dashboard</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>SEO & content marketing</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Email & SMS automation</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Dedicated account manager</div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Get Started →</a>
+    </div>
+    <div class="pkg-card rv d3">
+      <p class="pkg-name">Elite</p>
+      <p class="pkg-sub">Full-service agency partnership for established brands ready to dominate.</p>
+      <p class="pkg-price">Custom<span> pricing</span></p>
+      <p class="pkg-billing">tailored to your business</p>
+      <div class="pkg-features">
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Everything in Growth</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Web design & development</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Influencer campaign management</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Brand strategy & identity</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Unlimited creative assets</div>
+        <div class="pkg-feat"><div class="pkg-feat-check on"><svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.5" fill="none"/></svg></div>Priority support + weekly calls</div>
+      </div>
+      <a href="contact.html" class="pkg-cta">Get Started →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-cell rv"><div class="stat-big">80%+</div><div class="stat-label">Client Retention Rate</div></div>
+    <div class="stat-cell rv"><div class="stat-big">15X</div><div class="stat-label">Average ROI</div></div>
+    <div class="stat-cell rv"><div class="stat-big">$M+</div><div class="stat-label">Revenue Generated</div></div>
+    <div class="stat-cell rv"><div class="stat-big">95%</div><div class="stat-label">Renewal Rate</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2 class="rv">Not Sure Which Service<br><strong>You Need?</strong></h2>
+  <p class="rv">Book a free strategy call and we'll tell you exactly which services will move the needle most for your specific business.</p>
+  <a href="contact.html" class="btn-dark rv">Book a Free Strategy Call →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 California Viral Marketing Co. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms & Conditions</a></p>
+  </div>
+  <p class="footer-tagline">Viral Ideas. Real Results.</p>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.svc-card-visual,.pkg-card,.step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='52px';curR.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='36px';curR.style.height='36px';});
+});
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+
+/* STICKY NAV ACTIVE STATE */
+const sections=['meta','google','tiktok','seo','content','web','email','influencer','brand'];
+const navBtns=document.querySelectorAll('.svc-nav-btn');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-160) current=id;
+  });
+  navBtns.forEach((btn,i)=>{
+    btn.classList.toggle('active',sections[i]===current);
+  });
+},{passive:true});
+
+/* SMOOTH SCROLL TO SERVICE */
+function scrollTo(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
