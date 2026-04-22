@@ -682,7 +682,7 @@ footer { background:#030305; padding:96px 80px 48px; }
     Replace the src below with your logo file path
     e.g. src="your-logo.png"
   -->
-  <img src="logo.png" alt="California Viral Marketing Co." style="height:110px;width:auto;object-fit:contain;opacity:0;animation:ldFade .8s .3s forwards;filter:drop-shadow(0 0 20px rgba(232,99,26,.5));">
+  <img src="logo.png" alt="" style="height:110px;width:auto;object-fit:contain;opacity:0;animation:ldFade .8s .3s forwards;filter:drop-shadow(0 0 20px rgba(232,99,26,.5));" onerror="this.style.display='none'">
   <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:6px;background:linear-gradient(135deg,#E8631A,#E91E8C,#7B2D8B,#0ABFBC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:ldFade .8s .5s forwards;">California Viral</div>
   <div class="ldr-name">California Viral Marketing Co.</div>
   <div class="ldr-bar"><div class="ldr-fill"></div></div>
@@ -770,9 +770,10 @@ footer { background:#030305; padding:96px 80px 48px; }
 <!-- NAV -->
 <nav id="main-nav">
   <a class="nav-logo-slot" href="#">
-    <img class="nav-logo-img"
+    <img class="nav-logo-img" id="nav-logo-img"
       src="logo.png"
-      alt="California Viral Marketing Co.">
+      alt=""
+      onerror="this.style.display='none'">
     <div class="nav-brand-text">
       <span class="nav-brand-main">California Viral</span>
       <span class="nav-brand-sub">Marketing Co.</span>
@@ -802,7 +803,7 @@ footer { background:#030305; padding:96px 80px 48px; }
   <div class="hero-content">
     <!-- Hero logo — large display above headline -->
     <div class="hero-logo-display">
-      <img src="logo.png" alt="California Viral Marketing Co.">
+      <img id="hero-logo-img" src="logo.png" alt="" onerror="this.style.display='none';this.parentElement.style.display='none'">
     </div>
     <div class="hero-tag">
       <div class="hero-tag-pill"><span>Performance Marketing Agency · California</span></div>
@@ -1239,7 +1240,7 @@ footer { background:#030305; padding:96px 80px 48px; }
   <div class="footer-top">
     <div>
       <div class="footer-logo-zone">
-        <img class="footer-logo-img" src="logo.png" alt="California Viral Marketing Co.">
+        <img class="footer-logo-img" id="footer-logo-img" src="logo.png" alt="" onerror="this.style.display='none'">
         <div>
           <div class="footer-brand-nm">California Viral</div>
           <div class="footer-brand-sb">Marketing Co.</div>
@@ -1379,5 +1380,44 @@ const statsObs=new IntersectionObserver(entries=>{
 },{threshold:.3});
 const sb=document.querySelector('.stats-band'); if(sb)statsObs.observe(sb);
 </script>
+
+<script>
+// Smart logo loader — tries multiple common filenames automatically
+// Works whether file is named logo.png, Logo.png, logo.PNG, california-viral-logo.png etc.
+const LOGO_FILENAMES = [
+  'logo.png',
+  'Logo.png', 
+  'logo.PNG',
+  'logo.jpg',
+  'logo.JPG',
+  'Logo.jpg',
+  'california-viral-logo.png',
+  'california-viral-marketing-logo.png',
+  'cvm-logo.png',
+  'brand-logo.png',
+  'ChatGPT_Image_Apr_22__2026__02_01_49_PM.png'
+];
+
+const LOGO_IDS = ['nav-logo-img','hero-logo-img','footer-logo-img'];
+
+function tryLogo(imgEl, index) {
+  if (index >= LOGO_FILENAMES.length) return;
+  const testImg = new Image();
+  testImg.onload = () => {
+    imgEl.src = LOGO_FILENAMES[index];
+    imgEl.style.display = '';
+  };
+  testImg.onerror = () => tryLogo(imgEl, index + 1);
+  testImg.src = LOGO_FILENAMES[index];
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  LOGO_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) tryLogo(el, 0);
+  });
+});
+</script>
+
 </body>
 </html>
