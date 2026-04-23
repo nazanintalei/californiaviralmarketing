@@ -347,20 +347,31 @@ nav.scrolled {
 
 
 @keyframes phoneSlideLeft {
-  from { opacity:0; transform:translateY(60px) rotate(-3deg); }
-  to   { opacity:1; transform:translateY(0)    rotate(0deg); }
+  from { opacity:0; transform:translateY(70px) rotate(-8deg); }
+  to   { opacity:1; transform:translateY(0)    rotate(-7deg); }
 }
 @keyframes phoneSlideRight {
-  from { opacity:0; transform:translateY(60px) rotate(3deg); }
-  to   { opacity:1; transform:translateY(0)    rotate(0deg); }
+  from { opacity:0; transform:translateY(70px) rotate(8deg); }
+  to   { opacity:1; transform:translateY(0)    rotate(6deg); }
 }
-.pc-left  { animation: phoneSlideLeft  1s 2.3s ease both; opacity:0; }
-.pc-right { animation: phoneSlideRight 1s 2.5s ease both; opacity:0; }
+/* Floating orbit animations */
+@keyframes floatLeft {
+  0%   { transform: translateY(0px)   rotate(-7deg); }
+  50%  { transform: translateY(-18px) rotate(-5deg); }
+  100% { transform: translateY(0px)   rotate(-7deg); }
+}
+@keyframes floatRight {
+  0%   { transform: translateY(0px)   rotate(6deg); }
+  50%  { transform: translateY(-14px) rotate(8deg); }
+  100% { transform: translateY(0px)   rotate(6deg); }
+}
+.pc-left  { opacity:0; }
+.pc-right { opacity:0; }
 
 /* ══ PHONE MOCKUPS — HERO RIGHT SIDE ══ */
 .phones-zone {
-  position:absolute; right:72px; top:50%; transform:translateY(-50%);
-  width:460px; height:560px; z-index:6; padding-top:44px;
+  position:absolute; right:28px; top:50%; transform:translateY(-50%);
+  width:480px; height:580px; z-index:6; padding-top:44px;
   opacity:0; animation:slideInRight .9s 2.2s forwards;
 }
 @keyframes slideInRight { from{opacity:0;transform:translateY(-50%) translateX(50px)} to{opacity:1;transform:translateY(-50%) translateX(0)} }
@@ -371,16 +382,18 @@ nav.scrolled {
   cursor:none;
   transition:transform .4s ease, box-shadow .4s;
 }
-.phone-card:hover { transform:translateY(-6px) !important; }
+/* hover handled by float animation */
 .pc-left  {
   left:0; top:72px; width:212px; height:424px;
   box-shadow:0 24px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06), 0 0 60px rgba(232,99,26,.15);
   z-index:2;
+  animation: phoneSlideLeft 1s 2.3s ease both, floatLeft 5s 3.5s ease-in-out infinite !important;
 }
 .pc-right {
   right:0; top:0; width:248px; height:496px;
   box-shadow:0 32px 100px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.06), 0 0 80px rgba(10,191,188,.12);
   z-index:3;
+  animation: phoneSlideRight 1s 2.5s ease both, floatRight 6s 3.7s ease-in-out infinite !important;
 }
 
 /* Phone screen — animated gradient simulates live video */
