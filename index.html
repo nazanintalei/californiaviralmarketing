@@ -347,30 +347,30 @@ nav.scrolled {
 
 
 @keyframes phoneSlideLeft {
-  from { opacity:0; transform:translateY(70px) rotate(-8deg); }
-  to   { opacity:1; transform:translateY(0)    rotate(-7deg); }
+  from { opacity:0; transform:translateY(60px) rotate(-8deg); }
+  to   { opacity:1; transform:translateY(0)    rotate(-5deg); }
 }
 @keyframes phoneSlideRight {
-  from { opacity:0; transform:translateY(70px) rotate(8deg); }
-  to   { opacity:1; transform:translateY(0)    rotate(6deg); }
+  from { opacity:0; transform:translateY(60px) rotate(0deg); }
+  to   { opacity:1; transform:translateY(0)    rotate(0deg); }
 }
-/* Floating orbit animations */
+/* Subtle float — left phone slight orbit, right phone gentle up/down */
 @keyframes floatLeft {
-  0%   { transform: translateY(0px)   rotate(-7deg); }
-  50%  { transform: translateY(-18px) rotate(-5deg); }
-  100% { transform: translateY(0px)   rotate(-7deg); }
+  0%   { transform: translateY(0px)  rotate(-5deg); }
+  50%  { transform: translateY(-8px) rotate(-4deg); }
+  100% { transform: translateY(0px)  rotate(-5deg); }
 }
 @keyframes floatRight {
-  0%   { transform: translateY(0px)   rotate(6deg); }
-  50%  { transform: translateY(-14px) rotate(8deg); }
-  100% { transform: translateY(0px)   rotate(6deg); }
+  0%   { transform: translateY(0px)  rotate(0deg); }
+  50%  { transform: translateY(-8px) rotate(0deg); }
+  100% { transform: translateY(0px)  rotate(0deg); }
 }
 .pc-left  { opacity:0; }
 .pc-right { opacity:0; }
 
 /* ══ PHONE MOCKUPS — HERO RIGHT SIDE ══ */
 .phones-zone {
-  position:absolute; right:28px; top:50%; transform:translateY(-50%);
+  position:absolute; right:-20px; top:50%; transform:translateY(-50%);
   width:480px; height:580px; z-index:6; padding-top:44px;
   opacity:0; animation:slideInRight .9s 2.2s forwards;
 }
