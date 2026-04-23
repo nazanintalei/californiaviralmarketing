@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industries | California Viral Marketing Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060608;--dark:#0d0d12;--white:#fff;
+  --orange:#E8631A;--teal:#0ABFBC;--purple:#7B2D8B;--pink:#E91E8C;
+  --brand:linear-gradient(135deg,#E8631A 0%,#E91E8C 40%,#7B2D8B 70%,#0ABFBC 100%);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:#fff;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);background:var(--teal);transition:width .25s,height .25s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(10,191,188,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:78px;background:rgba(6,6,8,.95);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(20px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-logo-img{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 0 16px rgba(232,99,26,.5));}
+.nav-brand-text{display:flex;flex-direction:column;}
+.nav-brand-main{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#fff;line-height:1.3;}
+.nav-brand-sub{font-size:7px;font-weight:500;letter-spacing:3px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;list-style:none;}
+.nav-links a{display:block;padding:0 13px;height:78px;line-height:78px;font-size:9px;letter-spacing:1.8px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:18px;left:13px;right:13px;height:1.5px;background:var(--brand);transform:scaleX(0);transition:transform .3s;border-radius:1px;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-dropdown-wrap{position:relative;}
+.nav-chevron{font-size:9px;margin-left:3px;display:inline-block;transition:transform .3s;}
+.nav-dropdown-wrap:hover .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% - 8px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:200px;background:rgba(8,8,8,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:8px 0;opacity:0;visibility:hidden;transition:all .25s ease;z-index:9999;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.nav-dropdown a{display:block;padding:10px 20px;height:auto;line-height:1.4;font-size:9px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;color:rgba(255,255,255,.55);border-left:2px solid transparent;transition:all .2s;}
+.nav-dropdown a::after{display:none;}
+.nav-dropdown a:hover{color:#fff;background:rgba(255,255,255,.04);border-left-color:var(--orange);padding-left:24px;}
+.nav-cta{padding:12px 26px;font-size:9px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:var(--black);cursor:none;border:none;background:var(--brand);border-radius:2px;transition:opacity .2s;text-decoration:none;display:inline-block;line-height:normal;}
+.nav-cta:hover{opacity:.85;}
+
+/* PAGE HERO */
+.page-hero{min-height:55vh;background:var(--black);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(10,191,188,.12) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 10% 90%,rgba(232,99,26,.1) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 90% 10%,rgba(123,45,139,.12) 0%,transparent 50%);}
+.page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;}
+.hero-inner{position:relative;z-index:2;}
+.eyebrow-row{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+.ey-line{width:36px;height:1.5px;border-radius:1px;background:var(--brand);}
+.ey-text{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,90px);font-weight:300;letter-spacing:-1px;line-height:1.05;color:#fff;margin-bottom:20px;}
+.page-h1 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;max-width:560px;margin:0 auto;line-height:1.9;}
+
+/* SHARED */
+.btn-brand{display:inline-block;padding:16px 44px;background:var(--brand);color:var(--black);font-size:9.5px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:transform .2s,box-shadow .3s;box-shadow:0 6px 28px rgba(232,99,26,.25);cursor:none;}
+.btn-brand:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,99,26,.4);}
+.btn-outline-w{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:9.5px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;text-decoration:none;cursor:none;transition:all .3s;border-radius:2px;}
+.btn-outline-w:hover{border-color:#fff;color:#fff;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-l{opacity:0;transform:translateX(-32px);transition:opacity .85s ease,transform .85s ease;}
+.rv-r{opacity:0;transform:translateX(32px);transition:opacity .85s ease,transform .85s ease;}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none;}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.rv.d4{transition-delay:.4s}.rv.d5{transition-delay:.5s}.rv.d6{transition-delay:.6s}
+
+/* INDUSTRIES OVERVIEW GRID */
+.overview{background:var(--black);padding:80px 80px 60px;}
+.overview-inner{max-width:1200px;margin:0 auto;}
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:56px;}
+.ov-item{position:relative;overflow:hidden;cursor:none;}
+.ov-item img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(35%) brightness(.72);transition:filter .5s,transform .65s;}
+.ov-item:hover img{filter:grayscale(0%) brightness(.88);transform:scale(1.05);}
+.ov-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.75) 0%,rgba(6,6,8,.1) 55%,transparent 100%);pointer-events:none;}
+.ov-label{position:absolute;bottom:0;left:0;right:0;padding:28px 24px;z-index:2;transform:translateY(8px);transition:transform .4s;}
+.ov-item:hover .ov-label{transform:translateY(0);}
+.ov-num{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:700;margin-bottom:6px;}
+.ov-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;font-style:italic;color:#fff;line-height:1.2;margin-bottom:10px;}
+.ov-cta{display:inline-flex;align-items:center;gap:8px;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;transform:translateY(8px);transition:all .35s .1s;}
+.ov-item:hover .ov-cta{opacity:1;transform:translateY(0);}
+
+/* INDUSTRY DETAIL BLOCKS */
+.ind-block{padding:100px 80px;position:relative;}
+.ind-block:nth-child(odd){background:var(--black);}
+.ind-block:nth-child(even){background:var(--dark);}
+.ind-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);}
+.ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;max-width:1200px;margin:0 auto;}
+.ind-grid.flip{direction:rtl;}
+.ind-grid.flip>*{direction:ltr;}
+
+/* Left content */
+.ind-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.ind-ey-line{width:24px;height:1.5px;background:var(--brand);}
+.ind-ey-text{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ind-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,52px);font-weight:300;line-height:1.08;color:#fff;margin-bottom:20px;}
+.ind-h2 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ind-desc{font-size:13.5px;color:rgba(255,255,255,.5);line-height:2;font-weight:300;margin-bottom:28px;}
+/* Challenge / Solution */
+.cs-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+.cs-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:20px;}
+.cs-box-label{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cs-box p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.8;font-weight:300;}
+/* Services list */
+.ind-services{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.ind-svc-tag{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:20px;transition:all .25s;}
+.ind-svc-tag:hover{border-color:rgba(232,99,26,.4);color:rgba(232,99,26,.8);}
+/* Results */
+.ind-results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+.ir-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px;text-align:center;}
+.ir-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+.ir-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+/* Photo side */
+.ind-photo{position:relative;overflow:hidden;}
+.ind-photo img{width:100%;height:540px;object-fit:cover;object-position:center top;display:block;filter:grayscale(10%);transition:filter .5s,transform .6s;}
+.ind-photo:hover img{filter:grayscale(0%);transform:scale(1.02);}
+.ind-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.55) 0%,transparent 55%);}
+.ind-photo-badge{position:absolute;top:24px;left:24px;background:rgba(6,6,8,.85);backdrop-filter:blur(12px);padding:12px 18px;border-left:3px solid var(--orange);}
+.ipb-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:3px;}
+.ipb-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:#fff;font-style:italic;}
+
+/* STATS BAND */
+.stats-band{background:var(--black);}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-cell{padding:64px 48px;text-align:center;border-right:1px solid rgba(255,255,255,.04);position:relative;}
+.stat-cell::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--brand);transform:scaleX(0);transition:transform .45s;}
+.stat-cell:hover::before{transform:scaleX(1);}
+.stat-big{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,5.5vw,82px);font-weight:300;line-height:1;margin-bottom:10px;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);}
+
+/* NOT IN OUR LIST */
+.not-listed{background:var(--dark);padding:100px 80px;}
+.nl-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;}
+.nl-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,54px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:20px;}
+.nl-left h2 em{font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nl-left p{font-size:13.5px;color:rgba(255,255,255,.5);line-height:2;font-weight:300;margin-bottom:32px;}
+.nl-right{display:flex;flex-direction:column;gap:14px;}
+.nl-item{display:flex;align-items:center;gap:16px;padding:18px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;transition:all .3s;cursor:none;}
+.nl-item:hover{background:rgba(255,255,255,.05);border-color:rgba(232,99,26,.25);transform:translateX(6px);}
+.nl-dot{width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;}
+.nl-text{font-size:12.5px;color:rgba(255,255,255,.6);font-weight:300;}
+
+/* CTA */
+.cta-band{background:var(--brand);padding:100px 80px;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,58px);font-weight:300;color:var(--black);letter-spacing:1px;margin-bottom:16px;line-height:1.15;position:relative;}
+.cta-band p{font-size:13px;color:rgba(0,0,0,.6);font-weight:300;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;}
+.btn-dark{display:inline-block;padding:18px 52px;background:var(--black);color:#fff;font-size:9.5px;letter-spacing:3px;font-weight:700;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:opacity .2s;}
+.btn-dark:hover{opacity:.8;}
+
+/* FOOTER */
+footer{background:#030305;padding:56px 80px 40px;border-top:1px solid rgba(255,255,255,.04);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);}
+.footer-bottom a{color:rgba(255,255,255,.2);text-decoration:none;}
+.footer-tagline{text-align:center;margin-top:24px;font-size:9px;letter-spacing:5px;text-transform:uppercase;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .overview-grid{grid-template-columns:repeat(2,1fr);}
+  .ind-grid,.ind-grid.flip{grid-template-columns:1fr;direction:ltr;}
+  .nl-grid{grid-template-columns:1fr;gap:48px;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .cs-row{grid-template-columns:1fr;}
+  .overview,.ind-block,.not-listed,.cta-band{padding:72px 32px;}
+  footer{padding:48px 32px 32px;}
+}
+@media(max-width:600px){
+  .overview-grid{grid-template-columns:1fr 1fr;}
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .ind-results{grid-template-columns:1fr 1fr;}
+  .page-hero{padding:100px 24px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img class="nav-logo-img" src="logo1.png" alt="California Viral Marketing Co." onerror="this.style.display='none'">
+    <div class="nav-brand-text">
+      <span class="nav-brand-main">California Viral</span>
+      <span class="nav-brand-sub">Marketing Co.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="nav-dropdown-wrap">
+      <a href="services.html">Services <span class="nav-chevron">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="services.html#meta">Meta Advertising</a>
+        <a href="services.html#google">Google Ads & PPC</a>
+        <a href="services.html#tiktok">TikTok Marketing</a>
+        <a href="services.html#seo">SEO & Content</a>
+        <a href="services.html#content">Content Creation</a>
+        <a href="services.html#web">Web Design</a>
+        <a href="services.html#email">Email & SMS</a>
+        <a href="services.html#influencer">Influencer Marketing</a>
+        <a href="services.html#brand">Brand Strategy</a>
+      </div>
+    </li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="industries.html" class="active">Industries</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <div class="ey-line"></div>
+      <span class="ey-text">Who We Serve</span>
+      <div class="ey-line"></div>
+    </div>
+    <h1 class="page-h1">Industries We<br><em>Choose to Partner With</em></h1>
+    <p class="page-sub">We don't work with everyone. We work with ambitious California brands in specific industries where we know our Viral Growth Blueprint delivers extraordinary results.</p>
+  </div>
+</section>
+
+<!-- OVERVIEW GRID -->
+<section class="overview">
+  <div class="overview-inner">
+    <div style="text-align:center;margin-bottom:0;">
+      <div style="display:inline-flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+        <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">6 Industries</span>
+        <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,46px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;" class="rv">Our Specialist Sectors</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="ov-item rv d1">
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80" alt="Cosmetic Dentistry">
+        <div class="ov-label">
+          <p class="ov-num">Industry 01</p>
+          <p class="ov-name">Cosmetic Dentistry</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+      <div class="ov-item rv d2">
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80" alt="Cosmetic Clinics">
+        <div class="ov-label">
+          <p class="ov-num">Industry 02</p>
+          <p class="ov-name">Cosmetic Clinics</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+      <div class="ov-item rv d3">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80" alt="Aesthetic Clinics">
+        <div class="ov-label">
+          <p class="ov-num">Industry 03</p>
+          <p class="ov-name">Aesthetic Clinics</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+      <div class="ov-item rv d1">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Online Coaches">
+        <div class="ov-label">
+          <p class="ov-num">Industry 04</p>
+          <p class="ov-name">Online Coaches & Influencers</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+      <div class="ov-item rv d2">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80" alt="Medi Spas">
+        <div class="ov-label">
+          <p class="ov-num">Industry 05</p>
+          <p class="ov-name">Medi Spas</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+      <div class="ov-item rv d3">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Training Providers">
+        <div class="ov-label">
+          <p class="ov-num">Industry 06</p>
+          <p class="ov-name">Accredited Training Providers</p>
+          <span class="ov-cta">Learn More →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<section class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-cell rv"><div class="stat-big">6</div><div class="stat-label">Specialist Industries</div></div>
+    <div class="stat-cell rv"><div class="stat-big">15X</div><div class="stat-label">Average ROI</div></div>
+    <div class="stat-cell rv"><div class="stat-big">$M+</div><div class="stat-label">Revenue Generated</div></div>
+    <div class="stat-cell rv"><div class="stat-big">95%</div><div class="stat-label">Client Renewal Rate</div></div>
+  </div>
+</section>
+
+<!-- INDUSTRY 01 — Cosmetic Dentistry -->
+<section class="ind-block" id="dental">
+  <div class="ind-grid">
+    <div class="rv-l">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 01</span></div>
+      <h2 class="ind-h2">Cosmetic <em>Dentistry</em></h2>
+      <p class="ind-desc">Cosmetic dental practices across California face one of the most competitive local marketing environments in the country. Patients are high-value, high-intent — but they need to trust you before they'll book. We build campaigns that combine authority-driven content with precision-targeted paid ads to fill your chair with qualified patients consistently.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>High treatment costs mean long consideration periods. Patients research extensively before choosing a dentist — your brand needs to be everywhere they look.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>Multi-platform presence strategy — Meta ads for awareness, Google for high-intent search capture, SEO for long-term authority and content to build trust.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">14X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">140+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$35K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">Meta Advertising</span>
+        <span class="ind-svc-tag">Google Ads</span>
+        <span class="ind-svc-tag">Local SEO</span>
+        <span class="ind-svc-tag">Content Creation</span>
+        <span class="ind-svc-tag">Web Design</span>
+        <span class="ind-svc-tag">Email Marketing</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-r">
+      <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=700&q=85" alt="Cosmetic Dentistry">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 01</p><p class="ipb-name">Cosmetic Dentistry</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY 02 — Cosmetic Clinics -->
+<section class="ind-block" id="cosmetic">
+  <div class="ind-grid flip">
+    <div class="rv-r">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 02</span></div>
+      <h2 class="ind-h2">Cosmetic <em>Clinics</em></h2>
+      <p class="ind-desc">Cosmetic clinics operate in a visually-driven space where before-and-after results are the most powerful marketing tool available. We build scroll-stopping content campaigns that showcase your results, build your brand as the authority in your market and generate a consistent pipeline of new consultations every single month.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>Strict advertising policies on Meta and Google around cosmetic procedures require a specialist approach to stay compliant while still driving maximum results.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>Policy-compliant creative frameworks combined with organic content strategies and SEO that drive consistent consultations without ad account risk.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">12X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">200+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$60K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">Instagram Ads</span>
+        <span class="ind-svc-tag">TikTok Marketing</span>
+        <span class="ind-svc-tag">Content Creation</span>
+        <span class="ind-svc-tag">Influencer Marketing</span>
+        <span class="ind-svc-tag">SEO</span>
+        <span class="ind-svc-tag">Web Design</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-l">
+      <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=700&q=85" alt="Cosmetic Clinics">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 02</p><p class="ipb-name">Cosmetic Clinics</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY 03 — Aesthetic Clinics -->
+<section class="ind-block" id="aesthetic">
+  <div class="ind-grid">
+    <div class="rv-l">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 03</span></div>
+      <h2 class="ind-h2">Aesthetic <em>Clinics</em></h2>
+      <p class="ind-desc">The aesthetics industry is booming across California — but so is the competition. Standing out requires a sophisticated brand presence, trust-building content and paid campaigns that reach the exact demographic willing to invest in their appearance. We specialise in positioning aesthetic clinics as the premium choice in their local market.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>Commoditisation of aesthetic treatments means price competition is fierce. The clinics that win are those with the strongest brand trust and most visible online presence.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>Premium brand positioning strategy combined with targeted Meta and TikTok campaigns that attract high-value clients who choose on quality, not price.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">11X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">180+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$50K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">Meta Advertising</span>
+        <span class="ind-svc-tag">Brand Strategy</span>
+        <span class="ind-svc-tag">Content Creation</span>
+        <span class="ind-svc-tag">Google Ads</span>
+        <span class="ind-svc-tag">Local SEO</span>
+        <span class="ind-svc-tag">Email Marketing</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-r">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=85" alt="Aesthetic Clinics">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 03</p><p class="ipb-name">Aesthetic Clinics</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY 04 — Online Coaches & Influencers -->
+<section class="ind-block" id="coaching">
+  <div class="ind-grid flip">
+    <div class="rv-r">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 04</span></div>
+      <h2 class="ind-h2">Online Coaches <em>& Influencers</em></h2>
+      <p class="ind-desc">California is the global capital of the creator economy — and the online coaching space is more competitive than ever. We help coaches and influencers transform their audience into paying clients through precision funnels, TikTok and Instagram content strategies, and paid campaigns that consistently fill their programmes with high-quality enrolments.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>Building consistent, predictable revenue from an audience is harder than it looks. Most coaches rely on launches — we build systems that generate sales every single month.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>VSL funnel architecture combined with TikTok and Instagram paid campaigns, organic content strategy and email automation that converts cold audiences to buyers.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">13X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">180+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$40K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">TikTok Marketing</span>
+        <span class="ind-svc-tag">Instagram Ads</span>
+        <span class="ind-svc-tag">Funnel Design</span>
+        <span class="ind-svc-tag">Content Creation</span>
+        <span class="ind-svc-tag">Influencer Marketing</span>
+        <span class="ind-svc-tag">Email Automation</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-l">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&q=85" alt="Online Coaches">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 04</p><p class="ipb-name">Online Coaches</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY 05 — Medi Spas -->
+<section class="ind-block" id="medispa">
+  <div class="ind-grid">
+    <div class="rv-l">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 05</span></div>
+      <h2 class="ind-h2">Medi <em>Spas</em></h2>
+      <p class="ind-desc">Medi spas sit at the intersection of wellness and aesthetics — a premium positioning that requires premium marketing. California's wellness market is enormous, and we help medi spas capture their share of it with campaigns that drive high-value bookings for IV therapy, hormone optimisation, body contouring and luxury treatment packages.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>Medi spa clients are discerning and research-driven. They need to see expertise, cleanliness, results and a brand they can trust before they'll book their first appointment.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>Authority-building content strategy combined with targeted Meta and Google campaigns and an SEO foundation that makes your medi spa the most visible option locally.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">12X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">300+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$100K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">Meta Advertising</span>
+        <span class="ind-svc-tag">Google Ads</span>
+        <span class="ind-svc-tag">Local SEO</span>
+        <span class="ind-svc-tag">Content Creation</span>
+        <span class="ind-svc-tag">Email & SMS</span>
+        <span class="ind-svc-tag">Web Design</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-r">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=85" alt="Medi Spas">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 05</p><p class="ipb-name">Medi Spas</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY 06 — Training Providers -->
+<section class="ind-block" id="training">
+  <div class="ind-grid flip">
+    <div class="rv-r">
+      <div class="ind-eyebrow"><div class="ind-ey-line"></div><span class="ind-ey-text">Industry 06</span></div>
+      <h2 class="ind-h2">Accredited Training <em>Providers</em></h2>
+      <p class="ind-desc">Accredited training academies in aesthetics, health and wellness have an incredible business model — but only if their courses stay full. We help California training providers fill every cohort, build their reputation as the go-to training authority in their field and scale to multiple intake cycles per month through targeted digital marketing.</p>
+      <div class="cs-row">
+        <div class="cs-box">
+          <p class="cs-box-label">The Challenge</p>
+          <p>Course enrolments are highly cyclical and dependent on launches. Building a consistent pipeline of qualified students requires a year-round always-on marketing strategy.</p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-box-label">Our Solution</p>
+          <p>Meta and Google paid campaigns targeting aspiring practitioners, combined with strong SEO, content marketing and email nurture sequences that convert interest into enrolments.</p>
+        </div>
+      </div>
+      <div class="ind-results">
+        <div class="ir-box"><div class="ir-val">15X</div><div class="ir-label">Avg. ROAS</div></div>
+        <div class="ir-box"><div class="ir-val">120+</div><div class="ir-label">Leads/Month</div></div>
+        <div class="ir-box"><div class="ir-val">$30K+</div><div class="ir-label">Monthly Rev</div></div>
+      </div>
+      <div class="ind-services">
+        <span class="ind-svc-tag">Meta Advertising</span>
+        <span class="ind-svc-tag">Google Ads</span>
+        <span class="ind-svc-tag">SEO & Content</span>
+        <span class="ind-svc-tag">Email Automation</span>
+        <span class="ind-svc-tag">Brand Strategy</span>
+        <span class="ind-svc-tag">Web Design</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-brand">Work With Us →</a>
+        <a href="case-studies.html" class="btn-outline-w">View Case Studies</a>
+      </div>
+    </div>
+    <div class="ind-photo rv-l">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=85" alt="Training Providers">
+      <div class="ind-photo-overlay"></div>
+      <div class="ind-photo-badge"><p class="ipb-num">Industry 06</p><p class="ipb-name">Training Providers</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOT IN LIST -->
+<section class="not-listed">
+  <div class="nl-grid">
+    <div class="rv-l">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:36px;height:1.5px;background:var(--brand);border-radius:1px;"></div>
+        <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Other Industries</span>
+      </div>
+      <h2 class="nl-left h2" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,50px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:20px;">Your Industry Not <em style="font-style:italic;background:var(--brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Listed Here?</em></h2>
+      <p style="font-size:13.5px;color:rgba(255,255,255,.5);line-height:2;font-weight:300;margin-bottom:32px;">We may still be able to help. Our Viral Growth Blueprint has been successfully applied across many other California business types. Book a free strategy call and let's explore if we're the right fit for your industry.</p>
+      <a href="contact.html" class="btn-brand">Book a Free Strategy Call →</a>
+    </div>
+    <div class="nl-right rv-r">
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">E-Commerce & Retail</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Healthcare & Medical Practices</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Real Estate & Property</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Restaurants & Hospitality</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Fitness & Personal Training</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Legal & Professional Services</p></div>
+      <div class="nl-item"><div class="nl-dot"></div><p class="nl-text">Technology & SaaS</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2 class="rv">Ready to Dominate<br><strong>Your Industry in California?</strong></h2>
+  <p class="rv">Book a free strategy call and we'll show you exactly how we'd grow your business with our proven Viral Growth Blueprint.</p>
+  <a href="contact.html" class="btn-dark rv">Book a Free Strategy Call →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 California Viral Marketing Co. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms & Conditions</a></p>
+  </div>
+  <p class="footer-tagline">Viral Ideas. Real Results.</p>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.ov-item,.ind-photo,.nl-item,.stat-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='52px';curR.style.height='52px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='36px';curR.style.height='36px';});
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
