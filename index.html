@@ -961,10 +961,18 @@ footer { background:#030305; padding:96px 80px 48px; }
       </div>
       <!-- AUTOPLAY VIDEO — upload file named: video1.mp4 -->
       <video
+        id="phone-video-1"
         class="phone-video"
         src="video1.mp4"
-        autoplay muted loop playsinline
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        webkit-playsinline
+        x5-playsinline
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <source src="video1.mp4" type="video/mp4">
       </video>
       <!-- Fallback animated screen if video not found -->
       <div class="phone-screen phone-fallback" style="display:none;">
@@ -980,7 +988,7 @@ footer { background:#030305; padding:96px 80px 48px; }
       <div class="views-badge"><span>48.2K views</span></div>
     </div>
 
-    <!-- RIGHT PHONE — video2b.mp4 -->
+    <!-- RIGHT PHONE — video3.mp4 -->
     <div class="phone-card pc-right">
       <div class="phone-ui" style="display:flex;justify-content:flex-end;">
         <div class="ph-social-badge">
@@ -994,12 +1002,20 @@ footer { background:#030305; padding:96px 80px 48px; }
           <span class="phsb-label">Instagram</span>
         </div>
       </div>
-      <!-- AUTOPLAY VIDEO — upload file named: video2b.mp4 -->
+      <!-- AUTOPLAY VIDEO — upload file named: video3.mp4 -->
       <video
+        id="phone-video-2"
         class="phone-video"
-        src="video2b.mp4"
-        autoplay muted loop playsinline
+        src="video3.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        webkit-playsinline
+        x5-playsinline
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <source src="video3.mp4" type="video/mp4">
       </video>
       <!-- Fallback animated screen if video not found -->
       <div class="phone-screen phone-fallback" style="display:none;">
