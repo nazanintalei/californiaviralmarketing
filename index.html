@@ -980,7 +980,7 @@ footer { background:#030305; padding:96px 80px 48px; }
       <div class="views-badge"><span>48.2K views</span></div>
     </div>
 
-    <!-- RIGHT PHONE — video2.mp4 -->
+    <!-- RIGHT PHONE — video2b.mp4 -->
     <div class="phone-card pc-right">
       <div class="phone-ui" style="display:flex;justify-content:flex-end;">
         <div class="ph-social-badge">
@@ -994,10 +994,10 @@ footer { background:#030305; padding:96px 80px 48px; }
           <span class="phsb-label">Instagram</span>
         </div>
       </div>
-      <!-- AUTOPLAY VIDEO — upload file named: video2.mp4 -->
+      <!-- AUTOPLAY VIDEO — upload file named: video2b.mp4 -->
       <video
         class="phone-video"
-        src="video2.mp4"
+        src="video2b.mp4"
         autoplay muted loop playsinline
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       </video>
@@ -1521,6 +1521,33 @@ document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>obs.observe(el));
 function openVM(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
 function closeVM(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.vmodal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';}); });
+
+/* ══ FORCE BOTH VIDEOS TO PLAY ══ */
+function forcePlayVideos() {
+  document.querySelectorAll('.phone-video').forEach(v => {
+    v.muted = true;
+    v.playsInline = true;
+    const tryPlay = () => {
+      v.play().catch(() => {
+        // If play fails show fallback
+        v.style.display = 'none';
+        const fallback = v.nextElementSibling;
+        if (fallback) fallback.style.display = 'flex';
+      });
+    };
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      v.addEventListener('canplay', tryPlay, { once: true });
+      v.load();
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', forcePlayVideos);
+window.addEventListener('load', forcePlayVideos);
+// Also try on first user interaction (some browsers require it)
+document.addEventListener('click', forcePlayVideos, { once: true });
+document.addEventListener('touchstart', forcePlayVideos, { once: true });
 
 /* ══ COUNTER ANIMATION ══ */
 function runCounter(el){
