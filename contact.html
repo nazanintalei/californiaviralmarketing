@@ -409,28 +409,28 @@ footer { background:#030305; padding:56px 80px 40px; border-top:1px solid rgba(2
         <div class="form-row">
           <div class="form-group">
             <label>First Name *</label>
-            <input type="text" placeholder="John" required>
+            <input type="text" name="first_name" placeholder="John" required>
           </div>
           <div class="form-group">
             <label>Last Name *</label>
-            <input type="text" placeholder="Smith" required>
+            <input type="text" name="last_name" placeholder="Smith" required>
           </div>
         </div>
         <div class="form-group">
           <label>Email Address *</label>
-          <input type="email" placeholder="john@yourbusiness.com" required>
+          <input type="email" name="email" placeholder="john@yourbusiness.com" required>
         </div>
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="tel" placeholder="+1 (555) 000-0000">
+          <input type="tel" name="phone" placeholder="+1 (555) 000-0000">
         </div>
         <div class="form-group">
           <label>Business Name *</label>
-          <input type="text" placeholder="Your Business Name" required>
+          <input type="text" name="business_name" placeholder="Your Business Name" required>
         </div>
         <div class="form-group">
           <label>Industry</label>
-          <select>
+          <select name="industry">
             <option value="" disabled selected>Select your industry</option>
             <option>Cosmetic Dentistry</option>
             <option>Cosmetic Clinic</option>
@@ -445,7 +445,7 @@ footer { background:#030305; padding:56px 80px 40px; border-top:1px solid rgba(2
         </div>
         <div class="form-group">
           <label>Monthly Marketing Budget</label>
-          <select>
+          <select name="budget">
             <option value="" disabled selected>Select your budget range</option>
             <option>Under $1,000/month</option>
             <option>$1,000 – $3,000/month</option>
@@ -456,7 +456,7 @@ footer { background:#030305; padding:56px 80px 40px; border-top:1px solid rgba(2
         </div>
         <div class="form-group">
           <label>Services Interested In</label>
-          <select>
+          <select name="services">
             <option value="" disabled selected>What can we help with?</option>
             <option>Meta Advertising (Facebook & Instagram)</option>
             <option>Google Ads & PPC</option>
@@ -469,7 +469,7 @@ footer { background:#030305; padding:56px 80px 40px; border-top:1px solid rgba(2
         </div>
         <div class="form-group">
           <label>Tell Us About Your Goals</label>
-          <textarea placeholder="What are you looking to achieve? What's your biggest marketing challenge right now?"></textarea>
+          <textarea name="message" placeholder="What are you looking to achieve? What's your biggest marketing challenge right now?"></textarea>
         </div>
         <div class="form-checkbox">
           <input type="checkbox" id="agree" required>
