@@ -354,16 +354,20 @@ nav.scrolled {
   from { opacity:0; transform:translateY(60px) rotate(0deg); }
   to   { opacity:1; transform:translateY(0)    rotate(0deg); }
 }
-/* Subtle float — left phone slight orbit, right phone gentle up/down */
+/* Smooth buttery float animations */
 @keyframes floatLeft {
-  0%   { transform: translateY(0px)  rotate(-5deg); }
-  50%  { transform: translateY(-8px) rotate(-4deg); }
-  100% { transform: translateY(0px)  rotate(-5deg); }
+  0%   { transform: translateY(0px)   rotate(-5deg); }
+  25%  { transform: translateY(-5px)  rotate(-4.5deg); }
+  50%  { transform: translateY(-9px)  rotate(-4deg); }
+  75%  { transform: translateY(-4px)  rotate(-4.5deg); }
+  100% { transform: translateY(0px)   rotate(-5deg); }
 }
 @keyframes floatRight {
-  0%   { transform: translateY(0px)  rotate(0deg); }
-  50%  { transform: translateY(-8px) rotate(0deg); }
-  100% { transform: translateY(0px)  rotate(0deg); }
+  0%   { transform: translateY(0px)   rotate(0deg); }
+  25%  { transform: translateY(-4px)  rotate(0deg); }
+  50%  { transform: translateY(-8px)  rotate(0deg); }
+  75%  { transform: translateY(-3px)  rotate(0deg); }
+  100% { transform: translateY(0px)   rotate(0deg); }
 }
 .pc-left  { opacity:0; }
 .pc-right { opacity:0; }
@@ -387,13 +391,13 @@ nav.scrolled {
   left:0; top:72px; width:212px; height:424px;
   box-shadow:0 24px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06), 0 0 60px rgba(232,99,26,.15);
   z-index:2;
-  animation: phoneSlideLeft 1s 2.3s ease both, floatLeft 5s 3.5s ease-in-out infinite !important;
+  animation: phoneSlideLeft 1s 2.3s ease both, floatLeft 7s 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite !important;
 }
 .pc-right {
   right:0; top:0; width:248px; height:496px;
   box-shadow:0 32px 100px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.06), 0 0 80px rgba(10,191,188,.12);
   z-index:3;
-  animation: phoneSlideRight 1s 2.5s ease both, floatRight 6s 3.7s ease-in-out infinite !important;
+  animation: phoneSlideRight 1s 2.5s ease both, floatRight 8s 3.7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite !important;
 }
 
 /* Phone screen — animated gradient simulates live video */
